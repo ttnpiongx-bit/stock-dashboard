@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>信安 · 每日盤後技術面速覽</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#10151c; --surface:#171e27; --surface-2:#1d2530; --border:#28313d; --border-strong:#3a4552;
+    --text:#edeff3; --text-2:#9aa4b2; --text-3:#65707e;
+    --red:#e0483c; --red-bg:#2c1b1a; --red-text:#f5978d;
+    --green:#2e9b6b; --green-bg:#132923; --green-text:#7fd1ac;
+    --neutral:#8a93a0; --neutral-bg:#212831;
+    --gold:#e8b339;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:"Noto Sans TC","IBM Plex Mono",-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px; margin:0 auto; padding:28px 20px 64px;}
+
+  header.masthead{
+    display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between;
+    gap:8px 24px; padding-bottom:18px; border-bottom:1px solid var(--border); margin-bottom:20px;
+  }
+  header.masthead h1{
+    font-family:"Noto Serif TC",serif; font-weight:700; font-size:26px; margin:0;
+    letter-spacing:0.01em;
+  }
+  header.masthead .meta{font-size:13px; color:var(--text-3); font-family:"IBM Plex Mono",monospace;}
+  header.masthead .disclaimer{
+    width:100%; font-size:12.5px; color:var(--text-3); margin-top:6px; line-height:1.6;
+  }
+
+  .breadth{
+    display:flex; gap:1px; background:var(--border); border:1px solid var(--border);
+    border-radius:6px; overflow:hidden; margin-bottom:28px;
+  }
+  .breadth div{
+    flex:1; background:var(--surface); padding:12px 16px; text-align:center;
+  }
+  .breadth .num{font-family:"IBM Plex Mono",monospace; font-size:22px; font-weight:600; line-height:1;}
+  .breadth .lbl{font-size:12px; color:var(--text-3); margin-top:5px;}
+  .breadth .bull .num{color:var(--red-text);}
+  .breadth .bear .num{color:var(--green-text);}
+  .breadth .flat .num{color:var(--neutral);}
+
+  .grid{display:grid; grid-template-columns:1fr; gap:16px;}
+  @media(min-width:760px){.grid{grid-template-columns:1fr 1fr;}}
+
+  .card{
+    background:var(--surface); border:1px solid var(--border); border-radius:10px;
+    padding:18px 20px 20px; opacity:0; transform:translateY(6px);
+    animation:rise 0.5s ease forwards;
+  }
+  @media (prefers-reduced-motion: reduce){.card{animation:none; opacity:1; transform:none;}}
+  @keyframes rise{to{opacity:1; transform:none;}}
+
+  .card-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .symbol{font-family:"Noto Serif TC",serif; font-size:22px; font-weight:700;}
+  .asof{font-size:11.5px; color:var(--text-3); font-family:"IBM Plex Mono",monospace; margin-top:2px;}
+  .badge{
+    font-size:12.5px; font-weight:600; padding:4px 12px; border-radius:100px;
+    font-family:"Noto Sans TC",sans-serif;
+  }
+  .badge.bull{background:var(--red-bg); color:var(--red-text);}
+  .badge.bear{background:var(--green-bg); color:var(--green-text);}
+  .badge.flat{background:var(--neutral-bg); color:var(--neutral);}
+
+  .stat-row{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:16px;
+  }
+  .stat{background:var(--surface-2); border-radius:6px; padding:8px 10px;}
+  .stat .l{font-size:11px; color:var(--text-3); margin-bottom:3px;}
+  .stat .v{font-family:"IBM Plex Mono",monospace; font-size:15px; font-weight:600;}
+  .stat .v.up{color:var(--red-text);}
+  .stat .v.down{color:var(--green-text);}
+
+  .gauge-block{margin-bottom:16px;}
+  .gauge-label{
+    display:flex; justify-content:space-between; font-size:11.5px; color:var(--text-3);
+    margin-bottom:5px; font-family:"IBM Plex Mono",monospace;
+  }
+  .gauge-track{
+    position:relative; height:8px; border-radius:4px; overflow:hidden;
+    background:linear-gradient(90deg, var(--green) 0%, var(--green) 30%, var(--neutral) 30%, var(--neutral) 70%, var(--red) 70%, var(--red) 100%);
+    opacity:0.85;
+  }
+  .gauge-marker{
+    position:absolute; top:-3px; width:2px; height:14px; background:var(--text);
+    border-radius:1px; transform:translateX(-1px);
+  }
+
+  .charts{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px;}
+  .charts figure{margin:0; background:var(--surface-2); border-radius:6px; overflow:hidden; border:1px solid var(--border);}
+  .charts img{display:block; width:100%; height:auto; background:#fff;}
+  .charts figcaption{
+    font-size:11px; color:var(--text-3); padding:6px 8px; border-top:1px solid var(--border);
+  }
+  .chart-fallback{
+    display:flex; align-items:center; justify-content:center; height:120px;
+    color:var(--text-3); font-size:12px;
+  }
+
+  .ai-summary{
+    border-left:2px solid var(--gold); padding:10px 14px; background:var(--surface-2);
+    border-radius:0 6px 6px 0;
+  }
+  .ai-summary .tag{
+    font-size:10.5px; color:var(--gold); letter-spacing:0.06em; margin-bottom:4px;
+    font-family:"IBM Plex Mono",monospace;
+  }
+  .ai-summary p{
+    margin:0; font-family:"Noto Serif TC",serif; font-size:14.5px; line-height:1.7; color:var(--text);
+  }
+
+  .reasons{margin-top:12px; font-size:12px; color:var(--text-3); line-height:1.8;}
+  .reasons span{
+    display:inline-block; background:var(--surface-2); border:1px solid var(--border);
+    padding:2px 8px; border-radius:100px; margin:2px 4px 0 0;
+  }
+
+  footer{
+    margin-top:32px; padding-top:16px; border-top:1px solid var(--border);
+    font-size:12px; color:var(--text-3); line-height:1.8;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <h1>信安 · 每日盤後技術面速覽</h1>
+    <div class="meta" id="generatedAt">載入中…</div>
+    <div class="disclaimer">走勢標籤與技術指標為 n8n workflow 客觀規則運算結果，可能有假訊號；AI 摘要僅將已算好的數字轉為白話文字，不做投資建議、不做預測，僅供個人資料彙整參考。</div>
+  </header>
+
+  <div class="breadth" id="breadthBar"></div>
+
+  <div class="grid" id="cardGrid"></div>
+
+  <footer>
+    資料來源：Twelve Data（日線）／指標運算：n8n Code 節點（MA5·MA20·RSI14·MACD 12,26,9）／圖表：QuickChart／白話摘要：Claude API。<br>
+    此頁面目前顯示範例資料。實際使用時，把 n8n「解析AI摘要並合併」節點的輸出寫成 <code>data.json</code> 放在同一層目錄，頁面會自動改讀真實資料。
+  </footer>
+
+</div>
+
+<script>
+const SAMPLE_DATA = {
+  generatedAt: new Date().toISOString(),
+  count: 3,
+  note: "走勢標籤為技術指標客觀輸出，會有假訊號，非預測、非投資建議",
+  results: [
+    {
+      symbol: "AAPL", ok: true, asOf: "2026-08-14", close: 227.35,
+      ma5: 225.10, ma20: 219.80, rsi14: 61.4, macd: 1.82, signal: 1.35, macdHist: 0.47,
+      trend: "多頭", trendReasons: ["MA5 在 MA20 之上","收盤在 MA20 之上","RSI 偏強 (61.4)","MACD 柱狀為正"],
+      maChartUrl: "", candleChartUrl: "",
+      summary: "AAPL 站上 5 日、20 日均線，RSI 落在偏強區間，MACD 柱狀翻正，短線走勢偏多頭排列。"
+    },
+    {
+      symbol: "MSFT", ok: true, asOf: "2026-08-14", close: 401.20,
+      ma5: 404.50, ma20: 408.10, rsi14: 38.2, macd: -1.10, signal: -0.62, macdHist: -0.48,
+      trend: "空頭", trendReasons: ["MA5 在 MA20 之下","收盤在 MA20 之下","RSI 偏弱 (38.2)","MACD 柱狀為負"],
+      maChartUrl: "", candleChartUrl: "",
+      summary: "MSFT 跌破 5 日與 20 日均線，RSI 偏弱、MACD 柱狀為負，短線走勢偏空頭排列，留意後續量能。"
+    },
+    {
+      symbol: "NVDA", ok: true, asOf: "2026-08-14", close: 178.60,
+      ma5: 177.90, ma20: 179.40, rsi14: 49.8, macd: 0.05, signal: 0.08, macdHist: -0.03,
+      trend: "盤整", trendReasons: ["MA5 在 MA20 之下","收盤在 MA20 之下","RSI 中性 (49.8)","MACD 柱狀為負"],
+      maChartUrl: "", candleChartUrl: "",
+      summary: "NVDA 均線糾結、RSI 落在中性區間，MACD 柱狀接近零軸，短線呈現方向不明的盤整格局。"
+    }
+  ]
+};
+
+function trendClass(trend){
+  if (trend === "多頭") return "bull";
+  if (trend === "空頭") return "bear";
+  return "flat";
+}
+function fmtNum(v, digits){
+  if (v === null || v === undefined || Number.isNaN(v)) return "—";
+  return Number(v).toFixed(digits === undefined ? 2 : digits);
+}
+function fmtTime(iso){
+  try{
+    const d = new Date(iso);
+    return d.toLocaleString('zh-TW', { year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit' }) + ' 產生';
+  }catch(e){ return iso || ''; }
+}
+
+function renderBreadth(results){
+  const bull = results.filter(r => r.trend === '多頭').length;
+  const bear = results.filter(r => r.trend === '空頭').length;
+  const flat = results.length - bull - bear;
+  document.getElementById('breadthBar').innerHTML = `
+    <div class="bull"><div class="num">${bull}</div><div class="lbl">多頭</div></div>
+    <div class="flat"><div class="num">${flat}</div><div class="lbl">盤整</div></div>
+    <div class="bear"><div class="num">${bear}</div><div class="lbl">空頭</div></div>
+  `;
+}
+
+function chartFigure(url, label){
+  if (!url) {
+    return `<figure><div class="chart-fallback">${label}（等 data.json 提供圖表網址）</div></figure>`;
+  }
+  return `<figure><img src="${url}" alt="${label}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=chart-fallback>${label}圖表載入失敗</div>'"><figcaption>${label}</figcaption></figure>`;
+}
+
+function renderCards(results){
+  const grid = document.getElementById('cardGrid');
+  grid.innerHTML = results.map((r, i) => {
+    if (!r.ok) {
+      return `<div class="card" style="animation-delay:${i * 60}ms">
+        <div class="card-head"><span class="symbol">${r.symbol}</span><span class="badge flat">資料不足</span></div>
+        <div style="color:var(--text-3); font-size:13px;">${r.error || '這檔目前沒有足夠資料可以判斷，稍後重新執行 workflow 看看。'}</div>
+      </div>`;
+    }
+    const tc = trendClass(r.trend);
+    const rsiPos = Math.max(0, Math.min(100, r.rsi14 == null ? 50 : r.rsi14));
+    return `<div class="card" style="animation-delay:${i * 60}ms">
+      <div class="card-head">
+        <div>
+          <div class="symbol">${r.symbol}</div>
+          <div class="asof">${r.asOf || ''} 收盤</div>
+        </div>
+        <span class="badge ${tc}">${r.trend}</span>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat"><div class="l">收盤</div><div class="v">${fmtNum(r.close)}</div></div>
+        <div class="stat"><div class="l">MA5 / MA20</div><div class="v">${fmtNum(r.ma5)} / ${fmtNum(r.ma20)}</div></div>
+        <div class="stat"><div class="l">RSI(14)</div><div class="v ${r.rsi14 >= 55 ? 'up' : (r.rsi14 <= 45 ? 'down' : '')}">${fmtNum(r.rsi14, 1)}</div></div>
+        <div class="stat"><div class="l">MACD 柱</div><div class="v ${r.macdHist > 0 ? 'up' : (r.macdHist < 0 ? 'down' : '')}">${fmtNum(r.macdHist, 2)}</div></div>
+      </div>
+
+      <div class="gauge-block">
+        <div class="gauge-label"><span>超賣</span><span>RSI 動能</span><span>超買</span></div>
+        <div class="gauge-track"><div class="gauge-marker" style="left:${rsiPos}%"></div></div>
+      </div>
+
+      <div class="charts">
+        ${chartFigure(r.candleChartUrl, 'K線')}
+        ${chartFigure(r.maChartUrl, '均線')}
+      </div>
+
+      <div class="ai-summary">
+        <div class="tag">AI 白話解讀</div>
+        <p>${r.summary || '（尚未產生摘要）'}</p>
+      </div>
+
+      <div class="reasons">${(r.trendReasons || []).map(x => `<span>${x}</span>`).join('')}</div>
+    </div>`;
+  }).join('');
+}
+
+async function init(){
+  let data = SAMPLE_DATA;
+  let usedSample = true;
+  try{
+    const res = await fetch('./data.json', { cache: 'no-store' });
+    if (res.ok){
+      const real = await res.json();
+      if (real && Array.isArray(real.results)) { data = real; usedSample = false; }
+    }
+  }catch(e){}
+
+  document.getElementById('generatedAt').textContent =
+    (usedSample ? '範例資料 · ' : '') + fmtTime(data.generatedAt);
+  renderBreadth(data.results);
+  renderCards(data.results);
+}
+init();
+</script>
+</body>
+</html>
