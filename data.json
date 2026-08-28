@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-28T16:17:25.522+08:00",
+  "generatedAt": "2026-08-28T16:42:00.130+08:00",
   "overall": null,
   "note": "走勢標籤為技術指標客觀輸出，會有假訊號，非預測、非投資建議",
   "count": 3,
@@ -13,9 +13,9 @@
       "ma20": 309.32,
       "rsi14": 52.57,
       "macdHist": 0.41,
-      "candleChartUrl": "https://quickchart.io/chart/render/zf-f9b3bc0a-ecc9-42c5-921b-6711b813dd1b",
-      "maChartUrl": "https://quickchart.io/chart/render/zf-befdf752-0811-4e37-ad33-671ed0fa6ebe",
-      "aiComment": "蘋果收在314.58，短期均線在長期均線上方，動能指標呈中性，看起來是多頭格局。",
+      "candleChartUrl": "https://quickchart.io/chart/render/zf-33069e77-eaa8-48c6-930d-2c2f5f57f06f",
+      "maChartUrl": "https://quickchart.io/chart/render/zf-82c76ba6-08b0-4eae-bfc1-f2a71c25eff3",
+      "aiComment": "蘋果收在314.58，短期均線在長期均線上方，動能指標中性，MACD還在正值，整體呈現多頭走勢。",
       "error": null
     },
     {
@@ -27,9 +27,9 @@
       "ma20": 490.91,
       "rsi14": 70.47,
       "macdHist": -2.17,
-      "candleChartUrl": "https://quickchart.io/chart/render/zf-110299f1-5a76-40a7-be8a-3fdc2be569ab",
-      "maChartUrl": "https://quickchart.io/chart/render/zf-9255a307-2dd5-4ae8-805e-0568b13dbd0e",
-      "aiComment": "微軟收在505.06，短期均線領先長期均線，動能偏強，但柱狀圖轉負，維持多頭但有變化。",
+      "candleChartUrl": "https://quickchart.io/chart/render/zf-dd8e48ca-f5e6-4303-89ae-0817e723d8c3",
+      "maChartUrl": "https://quickchart.io/chart/render/zf-ab3c51e7-0c9d-4514-98a9-c7e8cf5a18fd",
+      "aiComment": "微軟收在505.06，短期均線高於長期均線，相對強度偏強來到70點，雖然MACD轉負但整體依舊多頭。",
       "error": null
     },
     {
@@ -41,9 +41,9 @@
       "ma20": 217.21,
       "rsi14": 61.34,
       "macdHist": -0.48,
-      "candleChartUrl": "https://quickchart.io/chart/render/zf-3eabc6b4-7af1-40b3-9b4f-c5e8b77a997e",
-      "maChartUrl": "https://quickchart.io/chart/render/zf-09ded69f-0fb5-4ff6-bd4e-5962e6a5b902",
-      "aiComment": "輝達收在227.98，短期均線在長期均線下方但收盤在上，動能偏強卻柱狀為負，處於盤整狀態。",
+      "candleChartUrl": "https://quickchart.io/chart/render/zf-ee3eb834-f36f-4fa2-b91a-c64230062a04",
+      "maChartUrl": "https://quickchart.io/chart/render/zf-a9f96cf4-7c24-4376-b021-b31ad2baf9c0",
+      "aiComment": "輝達收在227.98，短期均線在長期均線下方，但收盤仍高於長期均線，相對強度偏強，暫時盤整狀態。",
       "error": null
     }
   ]
