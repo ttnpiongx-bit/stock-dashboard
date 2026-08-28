@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -36,6 +37,13 @@
   header.masthead .disclaimer{
     width:100%; font-size:12.5px; color:var(--text-3); margin-top:6px; line-height:1.6;
   }
+
+  .overall-bar{
+    background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--gold);
+    border-radius:6px; padding:12px 16px; margin-bottom:20px; font-size:13.5px; line-height:1.7;
+    display:none;
+  }
+  .overall-bar .tag{font-size:10.5px; color:var(--gold); letter-spacing:0.06em; margin-bottom:4px; font-family:"IBM Plex Mono",monospace;}
 
   .breadth{
     display:flex; gap:1px; background:var(--border); border:1px solid var(--border);
@@ -104,7 +112,7 @@
   }
   .chart-fallback{
     display:flex; align-items:center; justify-content:center; height:120px;
-    color:var(--text-3); font-size:12px;
+    color:var(--text-3); font-size:12px; text-align:center; padding:8px;
   }
 
   .ai-summary{
@@ -140,13 +148,15 @@
     <div class="disclaimer">走勢標籤與技術指標為 n8n workflow 客觀規則運算結果，可能有假訊號；AI 摘要僅將已算好的數字轉為白話文字，不做投資建議、不做預測，僅供個人資料彙整參考。</div>
   </header>
 
+  <div class="overall-bar" id="overallBar"></div>
+
   <div class="breadth" id="breadthBar"></div>
 
   <div class="grid" id="cardGrid"></div>
 
   <footer>
     資料來源：Twelve Data（日線）／指標運算：n8n Code 節點（MA5·MA20·RSI14·MACD 12,26,9）／圖表：QuickChart／白話摘要：Claude API。<br>
-    此頁面目前顯示範例資料。實際使用時，把 n8n「解析AI摘要並合併」節點的輸出寫成 <code>data.json</code> 放在同一層目錄，頁面會自動改讀真實資料。
+    每天由 n8n 排程自動更新 <code>data.json</code>，此頁面每次開啟都會讀取最新資料。
   </footer>
 
 </div>
@@ -154,29 +164,30 @@
 <script>
 const SAMPLE_DATA = {
   generatedAt: new Date().toISOString(),
-  count: 3,
+  overall: null,
   note: "走勢標籤為技術指標客觀輸出，會有假訊號，非預測、非投資建議",
-  results: [
+  count: 3,
+  items: [
     {
-      symbol: "AAPL", ok: true, asOf: "2026-08-14", close: 227.35,
-      ma5: 225.10, ma20: 219.80, rsi14: 61.4, macd: 1.82, signal: 1.35, macdHist: 0.47,
-      trend: "多頭", trendReasons: ["MA5 在 MA20 之上","收盤在 MA20 之上","RSI 偏強 (61.4)","MACD 柱狀為正"],
-      maChartUrl: "", candleChartUrl: "",
-      summary: "AAPL 站上 5 日、20 日均線，RSI 落在偏強區間，MACD 柱狀翻正，短線走勢偏多頭排列。"
+      symbol: "AAPL", ok: true, trend: "多頭", close: 314.58,
+      ma5: 311.52, ma20: 309.32, rsi14: 52.57, macdHist: 0.41,
+      candleChartUrl: "", maChartUrl: "",
+      aiComment: "蘋果收在314.58，短期均線在長期均線上方，動能指標呈中性，看起來是多頭格局。",
+      error: null
     },
     {
-      symbol: "MSFT", ok: true, asOf: "2026-08-14", close: 401.20,
-      ma5: 404.50, ma20: 408.10, rsi14: 38.2, macd: -1.10, signal: -0.62, macdHist: -0.48,
-      trend: "空頭", trendReasons: ["MA5 在 MA20 之下","收盤在 MA20 之下","RSI 偏弱 (38.2)","MACD 柱狀為負"],
-      maChartUrl: "", candleChartUrl: "",
-      summary: "MSFT 跌破 5 日與 20 日均線，RSI 偏弱、MACD 柱狀為負，短線走勢偏空頭排列，留意後續量能。"
+      symbol: "MSFT", ok: true, trend: "多頭", close: 505.06,
+      ma5: 492.74, ma20: 490.91, rsi14: 70.47, macdHist: -2.17,
+      candleChartUrl: "", maChartUrl: "",
+      aiComment: "微軟收在505.06，短期均線領先長期均線，動能偏強，但柱狀圖轉負，維持多頭但有變化。",
+      error: null
     },
     {
-      symbol: "NVDA", ok: true, asOf: "2026-08-14", close: 178.60,
-      ma5: 177.90, ma20: 179.40, rsi14: 49.8, macd: 0.05, signal: 0.08, macdHist: -0.03,
-      trend: "盤整", trendReasons: ["MA5 在 MA20 之下","收盤在 MA20 之下","RSI 中性 (49.8)","MACD 柱狀為負"],
-      maChartUrl: "", candleChartUrl: "",
-      summary: "NVDA 均線糾結、RSI 落在中性區間，MACD 柱狀接近零軸，短線呈現方向不明的盤整格局。"
+      symbol: "NVDA", ok: true, trend: "盤整", close: 225.16,
+      ma5: 221.92, ma20: 210.39, rsi14: 63.04, macdHist: 2.04,
+      candleChartUrl: "", maChartUrl: "",
+      aiComment: "輝達呈現盤整走勢，均線糾結、RSI 中性，短線方向不明。",
+      error: null
     }
   ]
 };
@@ -196,11 +207,41 @@ function fmtTime(iso){
     return d.toLocaleString('zh-TW', { year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit' }) + ' 產生';
   }catch(e){ return iso || ''; }
 }
+// 相容兩種資料格式：items（aiComment）或 results（summary）
+function normalizeList(data){
+  const list = Array.isArray(data.items) ? data.items : (Array.isArray(data.results) ? data.results : []);
+  return list.map(r => ({
+    symbol: r.symbol,
+    ok: r.ok !== false,
+    asOf: r.asOf || null,
+    close: r.close ?? null,
+    ma5: r.ma5 ?? null,
+    ma20: r.ma20 ?? null,
+    rsi14: r.rsi14 ?? null,
+    macdHist: r.macdHist ?? null,
+    trend: r.trend || '資料不足',
+    trendReasons: r.trendReasons || null,
+    maChartUrl: r.maChartUrl || null,
+    candleChartUrl: r.candleChartUrl || null,
+    summary: r.aiComment || r.summary || null,
+    error: r.error || null
+  }));
+}
 
-function renderBreadth(results){
-  const bull = results.filter(r => r.trend === '多頭').length;
-  const bear = results.filter(r => r.trend === '空頭').length;
-  const flat = results.length - bull - bear;
+function renderOverall(data){
+  const el = document.getElementById('overallBar');
+  if (data.overall) {
+    el.style.display = 'block';
+    el.innerHTML = `<div class="tag">整體概況</div><div>${data.overall}</div>`;
+  } else {
+    el.style.display = 'none';
+  }
+}
+
+function renderBreadth(list){
+  const bull = list.filter(r => r.trend === '多頭').length;
+  const bear = list.filter(r => r.trend === '空頭').length;
+  const flat = list.length - bull - bear;
   document.getElementById('breadthBar').innerHTML = `
     <div class="bull"><div class="num">${bull}</div><div class="lbl">多頭</div></div>
     <div class="flat"><div class="num">${flat}</div><div class="lbl">盤整</div></div>
@@ -210,14 +251,14 @@ function renderBreadth(results){
 
 function chartFigure(url, label){
   if (!url) {
-    return `<figure><div class="chart-fallback">${label}（等 data.json 提供圖表網址）</div></figure>`;
+    return `<figure><div class="chart-fallback">${label}（尚無圖表網址）</div></figure>`;
   }
-  return `<figure><img src="${url}" alt="${label}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=chart-fallback>${label}圖表載入失敗</div>'"><figcaption>${label}</figcaption></figure>`;
+  return `<figure><img src="${url}" alt="${label}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=chart-fallback>${label}圖表載入失敗，可能是連結已過期</div>'"><figcaption>${label}</figcaption></figure>`;
 }
 
-function renderCards(results){
+function renderCards(list){
   const grid = document.getElementById('cardGrid');
-  grid.innerHTML = results.map((r, i) => {
+  grid.innerHTML = list.map((r, i) => {
     if (!r.ok) {
       return `<div class="card" style="animation-delay:${i * 60}ms">
         <div class="card-head"><span class="symbol">${r.symbol}</span><span class="badge flat">資料不足</span></div>
@@ -230,7 +271,7 @@ function renderCards(results){
       <div class="card-head">
         <div>
           <div class="symbol">${r.symbol}</div>
-          <div class="asof">${r.asOf || ''} 收盤</div>
+          ${r.asOf ? `<div class="asof">${r.asOf} 收盤</div>` : ''}
         </div>
         <span class="badge ${tc}">${r.trend}</span>
       </div>
@@ -257,7 +298,7 @@ function renderCards(results){
         <p>${r.summary || '（尚未產生摘要）'}</p>
       </div>
 
-      <div class="reasons">${(r.trendReasons || []).map(x => `<span>${x}</span>`).join('')}</div>
+      ${r.trendReasons ? `<div class="reasons">${r.trendReasons.map(x => `<span>${x}</span>`).join('')}</div>` : ''}
     </div>`;
   }).join('');
 }
@@ -269,14 +310,16 @@ async function init(){
     const res = await fetch('./data.json', { cache: 'no-store' });
     if (res.ok){
       const real = await res.json();
-      if (real && Array.isArray(real.results)) { data = real; usedSample = false; }
+      if (real && (Array.isArray(real.items) || Array.isArray(real.results))) { data = real; usedSample = false; }
     }
   }catch(e){}
 
+  const list = normalizeList(data);
   document.getElementById('generatedAt').textContent =
     (usedSample ? '範例資料 · ' : '') + fmtTime(data.generatedAt);
-  renderBreadth(data.results);
-  renderCards(data.results);
+  renderOverall(data);
+  renderBreadth(list);
+  renderCards(list);
 }
 init();
 </script>
