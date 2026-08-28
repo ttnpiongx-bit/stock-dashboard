@@ -1,0 +1,50 @@
+{
+  "generatedAt": "2026-08-28T16:17:25.522+08:00",
+  "overall": null,
+  "note": "走勢標籤為技術指標客觀輸出，會有假訊號，非預測、非投資建議",
+  "count": 3,
+  "items": [
+    {
+      "symbol": "AAPL",
+      "ok": true,
+      "trend": "多頭",
+      "close": 314.58,
+      "ma5": 311.52,
+      "ma20": 309.32,
+      "rsi14": 52.57,
+      "macdHist": 0.41,
+      "candleChartUrl": "https://quickchart.io/chart/render/zf-f9b3bc0a-ecc9-42c5-921b-6711b813dd1b",
+      "maChartUrl": "https://quickchart.io/chart/render/zf-befdf752-0811-4e37-ad33-671ed0fa6ebe",
+      "aiComment": "蘋果收在314.58，短期均線在長期均線上方，動能指標呈中性，看起來是多頭格局。",
+      "error": null
+    },
+    {
+      "symbol": "MSFT",
+      "ok": true,
+      "trend": "多頭",
+      "close": 505.06,
+      "ma5": 492.74,
+      "ma20": 490.91,
+      "rsi14": 70.47,
+      "macdHist": -2.17,
+      "candleChartUrl": "https://quickchart.io/chart/render/zf-110299f1-5a76-40a7-be8a-3fdc2be569ab",
+      "maChartUrl": "https://quickchart.io/chart/render/zf-9255a307-2dd5-4ae8-805e-0568b13dbd0e",
+      "aiComment": "微軟收在505.06，短期均線領先長期均線，動能偏強，但柱狀圖轉負，維持多頭但有變化。",
+      "error": null
+    },
+    {
+      "symbol": "NVDA",
+      "ok": true,
+      "trend": "盤整",
+      "close": 227.98,
+      "ma5": 214.78,
+      "ma20": 217.21,
+      "rsi14": 61.34,
+      "macdHist": -0.48,
+      "candleChartUrl": "https://quickchart.io/chart/render/zf-3eabc6b4-7af1-40b3-9b4f-c5e8b77a997e",
+      "maChartUrl": "https://quickchart.io/chart/render/zf-09ded69f-0fb5-4ff6-bd4e-5962e6a5b902",
+      "aiComment": "輝達收在227.98，短期均線在長期均線下方但收盤在上，動能偏強卻柱狀為負，處於盤整狀態。",
+      "error": null
+    }
+  ]
+}
