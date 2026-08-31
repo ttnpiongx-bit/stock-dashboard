@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T20:43:36.425+08:00",
+  "generatedAt": "2026-08-31T20:51:35.587+08:00",
   "overall": null,
   "note": "走勢標籤為技術指標客觀輸出，會有假訊號，非預測、非投資建議",
   "count": 8,
@@ -13,10 +13,10 @@
       "ma20": 309.86,
       "rsi14": 57.37,
       "macdHist": 0.89,
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-32f3b813-b532-4bb2-996e-2ef5ca9208ab",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-5b17cc20-80ae-4b1b-8fed-4db3757233c9",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "收盤 319.7，短期均線在長期均線之上，RSI 偏強達 57.4，MACD 柱狀為正，呈現多頭走勢。",
+      "aiComment": "蘋果現在走多頭，5日均線在20日均線上方，收盤價也站上20日均線，RSI偏強勢，MACD柱狀為正，整體技術面還算穩健。",
       "error": null
     },
     {
@@ -28,10 +28,10 @@
       "ma20": 493.35,
       "rsi14": 73.09,
       "macdHist": -1.22,
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-8e6b501a-31c8-4dff-a064-8cde6d955f39",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-c130f863-dc09-400b-bc40-eacc1f633637",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "收盤 513.53，短期均線在長期均線之上，RSI 強度達 73.1，雖 MACD 柱狀為負，但仍維持多頭態勢。",
+      "aiComment": "微軟維持多頭走勢，短期均線優於長期均線，收盤在20日均線之上，RSI達到73偏強，只是MACD柱狀轉負要留意。",
       "error": null
     },
     {
@@ -43,10 +43,10 @@
       "ma20": 218.05,
       "rsi14": 52.35,
       "macdHist": -0.49,
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-1304333e-3516-4c15-a2d4-8dbbaf66379b",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-deb20093-8435-4739-a08f-e46eed3694cd",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "收盤 217.55，短期均線在長期均線之下，收盤在長期均線下方，RSI 中性，MACD 柱狀為負，呈現空頭走勢。",
+      "aiComment": "輝達目前是空頭走勢，5日均線跌到20日均線下方，收盤價也沒站上20日均線，RSI中性偏弱，MACD也是負值。",
       "error": null
     },
     {
@@ -58,10 +58,10 @@
       "ma20": 575.77,
       "rsi14": 49.58,
       "macdHist": 1.94,
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-eef47fc0-8e59-4e21-b3a5-e8b300a8e276",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-42f38d53-7e89-4a3c-8fe7-4022f833a77f",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "收盤 578.02，短期均線在長期均線下方但收盤在長期均線上方，RSI 中性，MACD 柱狀為正，呈現盤整走勢。",
+      "aiComment": "Meta呈現盤整狀態，短期均線在長期均線下方，但收盤價站上20日均線，RSI中性、MACD為正，方向不夠明確。",
       "error": null
     },
     {
@@ -73,10 +73,10 @@
       "ma20": 366.86,
       "rsi14": 55.83,
       "macdHist": -2.22,
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-4f6696d0-2d55-41cd-bb43-e1014b784629",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-e2c0a582-2ef4-433f-bee8-b718bb1d849c",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "收盤 371.59，短期均線在長期均線下方但收盤在長期均線上方，RSI 偏強 55.8，MACD 柱狀為負，呈現盤整走勢。",
+      "aiComment": "Palo Alto Networks盤整中，5日均線仍在20日均線下方，雖然收盤站上20日但幅度不大，MACD柱狀轉負有些擔憂。",
       "error": null
     },
     {
@@ -88,10 +88,10 @@
       "ma20": 438.19,
       "rsi14": 47.97,
       "macdHist": -7.69,
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-121b5433-0acc-4626-bb16-e85e86700068",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-e946b751-2832-41cd-9bbf-922020a9a9b6",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "收盤 404.05，短期均線在長期均線下方且收盤亦在長期均線下方，RSI 中性，MACD 柱狀為負，呈現空頭走勢。",
+      "aiComment": "Prelude Therapeutics持續空頭，短期均線與收盤價雙雙跌破20日均線，RSI偏弱，MACD柱狀大幅為負，技術面偏弱。",
       "error": null
     },
     {
@@ -103,10 +103,10 @@
       "ma20": 78.01,
       "rsi14": 56.8,
       "macdHist": -0.61,
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-4e9c42b1-e63a-4abf-af78-1c324cc9ae06",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-a0e89a6d-5562-4e63-9b23-963a266111fd",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "收盤 78.08，短期均線在長期均線之上，收盤在長期均線上方，RSI 偏強 56.8，雖 MACD 柱狀為負，但維持多頭走勢。",
+      "aiComment": "Kinessa Therapeutics走多頭，5日均線在20日均線上方，收盤價也站上20日均線，RSI偏強，雖MACD柱狀為負但整體趨勢向上。",
       "error": null
     },
     {
@@ -118,10 +118,10 @@
       "ma20": 134.54,
       "rsi14": 55.65,
       "macdHist": 1.41,
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-b3814c82-ada5-4d74-bd3b-a170fb1e2dcd",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-09e6765b-baa7-4a5a-ac60-5182342d0275",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "收盤 141.5，短期均線在長期均線之上，RSI 偏強 55.7，MACD 柱狀為正，呈現多頭走勢。",
+      "aiComment": "Sprucepine維持多頭，短期均線優於長期均線，收盤價站上20日均線，RSI偏強勢，MACD柱狀轉正，技術面保持良好。",
       "error": null
     }
   ]
