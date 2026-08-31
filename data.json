@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-08-31T20:18:26.877+08:00",
+  "generatedAt": "2026-08-31T20:22:06.818+08:00",
   "overall": null,
   "note": "走勢標籤為技術指標客觀輸出，會有假訊號，非預測、非投資建議",
-  "count": 7,
+  "count": 8,
   "items": [
     {
       "symbol": "AAPL",
@@ -13,9 +13,9 @@
       "ma20": 309.86,
       "rsi14": 57.37,
       "macdHist": 0.89,
-      "candleChartUrl": "https://quickchart.io/chart/render/zf-f93b69d4-8a42-4748-b9d6-8f2a0aabfd0b",
-      "maChartUrl": "https://quickchart.io/chart/render/zf-2822b54c-e384-4a2d-81c8-8d083f55d024",
-      "aiComment": "蘋果目前走勢多頭，收盤319.7元在短期均線之上，RSI顯示動能偏強，MACD柱狀為正支撐上升動力。",
+      "candleChartUrl": "https://quickchart.io/chart/render/zf-173ecdf8-0ce0-4211-90b3-7ec8db4ed2db",
+      "maChartUrl": "https://quickchart.io/chart/render/zf-cb77fb8f-39ee-448c-bc8b-e2ac4c9cd246",
+      "aiComment": "蘋果目前在多頭走勢，收盤價在短期均線之上、RSI 偏強勢，動能指標也呈現正值，整體技術面表現不錯。",
       "error": null
     },
     {
@@ -27,9 +27,9 @@
       "ma20": 493.35,
       "rsi14": 73.09,
       "macdHist": -1.22,
-      "candleChartUrl": "https://quickchart.io/chart/render/zf-394a9587-7773-4110-a3e8-da5a30cd45e4",
-      "maChartUrl": "https://quickchart.io/chart/render/zf-61ab279f-d806-4207-81e4-40a2485d7b8e",
-      "aiComment": "微軟呈現多頭格局，收盤513.53元在均線之上，RSI達73.09顯示強勢狀態，雖MACD為負但整體走勢仍強。",
+      "candleChartUrl": "https://quickchart.io/chart/render/zf-cf3e6f64-7719-4ba8-8aa7-cba73e99279e",
+      "maChartUrl": "https://quickchart.io/chart/render/zf-c5131bd1-3e7c-4984-aed0-4f6f8ac49a74",
+      "aiComment": "微軟維持多頭格局，短期均線在長期均線上方、收盤價走強，RSI 來到 73 相當強勢，雖然動能指標為負但不減看好趨勢。",
       "error": null
     },
     {
@@ -41,9 +41,9 @@
       "ma20": 218.05,
       "rsi14": 52.35,
       "macdHist": -0.49,
-      "candleChartUrl": "https://quickchart.io/chart/render/zf-8284037b-228b-4f76-b3d8-58bdb131565a",
-      "maChartUrl": "https://quickchart.io/chart/render/zf-c7d0812d-0f71-48da-8d9b-0531e5feccbb",
-      "aiComment": "輝達目前空頭走勢，收盤217.55元低於均線，短期與長期均線皆走空，RSI中性、MACD為負反映下行壓力。",
+      "candleChartUrl": "https://quickchart.io/chart/render/zf-ec32663c-ddb3-4621-8c16-53bca75fa353",
+      "maChartUrl": "https://quickchart.io/chart/render/zf-3c3fabba-4bad-4109-88e0-a90c6dfdb98f",
+      "aiComment": "輝達目前處於空頭走勢，收盤價跌破短長期均線，RSI 在中性水位、動能指標也轉負，技術面走弱。",
       "error": null
     },
     {
@@ -55,9 +55,9 @@
       "ma20": 575.77,
       "rsi14": 49.58,
       "macdHist": 1.94,
-      "candleChartUrl": "https://quickchart.io/chart/render/zf-86e93160-3ebe-4841-886d-5ae2cfe3ab2e",
-      "maChartUrl": "https://quickchart.io/chart/render/zf-efad11d9-96b7-4e7b-881a-4bc81d0339a2",
-      "aiComment": "Meta呈盤整態勢，收盤578.02元在短期均線上但長期均線下方，RSI與MACD出現背離，暫無明確方向。",
+      "candleChartUrl": "https://quickchart.io/chart/render/zf-f6eb83d6-368d-467c-8f4b-492fb46448d4",
+      "maChartUrl": "https://quickchart.io/chart/render/zf-f281343d-e493-4c23-8b7f-7ba73eca7b9a",
+      "aiComment": "Meta 陷入盤整狀態，短期均線在長期下方但收盤價仍在長期均線上，RSI 居中、動能開始轉正，方向待明確。",
       "error": null
     },
     {
@@ -69,9 +69,9 @@
       "ma20": 366.86,
       "rsi14": 55.83,
       "macdHist": -2.22,
-      "candleChartUrl": "https://quickchart.io/chart/render/zf-bb953557-e3bf-470b-b1c6-c136120517f2",
-      "maChartUrl": "https://quickchart.io/chart/render/zf-e8b2a042-4cb3-4862-8bd3-f52bf87dca52",
-      "aiComment": "Palo Alto呈盤整格局，收盤371.59元高於長期均線但低於短期均線，RSI偏強但MACD為負顯現拉鋸局面。",
+      "candleChartUrl": "https://quickchart.io/chart/render/zf-8391799f-2708-4b65-8a5a-ce2deda2ec35",
+      "maChartUrl": "https://quickchart.io/chart/render/zf-47503dbb-0284-4c8f-abea-2de086a00a9d",
+      "aiComment": "Palo Alto Networks 處於盤整局面，雖然收盤價高於長期均線但短期均線已跌破，RSI 偏強但動能指標走弱，多空拉扯。",
       "error": null
     },
     {
@@ -83,9 +83,9 @@
       "ma20": 438.19,
       "rsi14": 47.97,
       "macdHist": -7.69,
-      "candleChartUrl": "https://quickchart.io/chart/render/zf-1905ffef-bfc5-4193-9857-444add8b9990",
-      "maChartUrl": "https://quickchart.io/chart/render/zf-8dc7e141-2207-4e32-add3-f8777384a129",
-      "aiComment": "普樂柏目前空頭走勢，收盤404.05元遠低於兩條均線，RSI中性且MACD柱狀為負7.69，下行壓力明顯。",
+      "candleChartUrl": "https://quickchart.io/chart/render/zf-578ccf17-36e3-478b-9e2c-8746b37d817c",
+      "maChartUrl": "https://quickchart.io/chart/render/zf-6b76eb18-f983-48a9-9257-66ef499666eb",
+      "aiComment": "PLPC 身處空頭走勢，短期長期均線雙雙破底、收盤價也跌深，RSI 中性、動能指標大幅為負，技術面明顯弱勢。",
       "error": null
     },
     {
@@ -97,9 +97,23 @@
       "ma20": 78.01,
       "rsi14": 56.8,
       "macdHist": -0.61,
-      "candleChartUrl": "https://quickchart.io/chart/render/zf-5a9e46d2-a3cd-42bb-ad85-a4fcb5bd36f8",
-      "maChartUrl": "https://quickchart.io/chart/render/zf-c0cbb0da-3827-4107-b7a9-551978522e87",
-      "aiComment": "Kiniksa呈多頭走勢，收盤78.08元在均線上方，RSI偏強達56.8，雖MACD為負但整體仍維持上行動能。",
+      "candleChartUrl": "https://quickchart.io/chart/render/zf-664ea2a1-a023-4905-9c5f-a177937236ef",
+      "maChartUrl": "https://quickchart.io/chart/render/zf-8f1f0bf9-8d7b-4852-b689-bdc0b05a06ab",
+      "aiComment": "Kinesa 維持多頭動能，短期均線在長期均線上方、收盤價也站穩，RSI 偏強勢，雖然動能指標微負但整體趨勢仍好。",
+      "error": null
+    },
+    {
+      "symbol": "SPCX",
+      "ok": true,
+      "trend": "多頭",
+      "close": 141.5,
+      "ma5": 138.99,
+      "ma20": 134.54,
+      "rsi14": 55.65,
+      "macdHist": 1.41,
+      "candleChartUrl": "https://quickchart.io/chart/render/zf-6e59142a-98e4-499a-aa48-39dba646f1f6",
+      "maChartUrl": "https://quickchart.io/chart/render/zf-f8a040b1-dc16-42a5-a0ca-4f57c9604d49",
+      "aiComment": "SPCX 呈現多頭格局，短期長期均線都在上升、收盤價走高，RSI 偏強勢、動能指標轉正，技術面相當積極。",
       "error": null
     }
   ]
