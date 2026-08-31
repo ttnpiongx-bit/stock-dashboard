@@ -2,326 +2,198 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>信安 · 每日盤後技術面速覽</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>個股技術走勢儀表板</title>
 <style>
   :root{
-    --bg:#10151c; --surface:#171e27; --surface-2:#1d2530; --border:#28313d; --border-strong:#3a4552;
-    --text:#edeff3; --text-2:#9aa4b2; --text-3:#65707e;
-    --red:#e0483c; --red-bg:#2c1b1a; --red-text:#f5978d;
-    --green:#2e9b6b; --green-bg:#132923; --green-text:#7fd1ac;
-    --neutral:#8a93a0; --neutral-bg:#212831;
-    --gold:#e8b339;
+    --bg:#1B2A4A; --card:#253660; --card2:#1F3050;
+    --gold:#F5C518; --body:#C0CCDD; --muted:#7C8BA5; --white:#FFFFFF;
+    --up:#E4572E;   /* 漲/多頭＝紅 */
+    --down:#27AE60; /* 跌/空頭＝綠 */
+    --flat:#7C8BA5;
+    --line:#33456b;
   }
-  *{box-sizing:border-box;}
+  *{ box-sizing:border-box; }
   body{
-    margin:0; background:var(--bg); color:var(--text);
-    font-family:"Noto Sans TC","IBM Plex Mono",-apple-system,sans-serif;
+    margin:0; background:var(--bg); color:var(--body);
+    font-family:"Noto Sans CJK TC","Microsoft JhengHei","PingFang TC","Segoe UI",sans-serif;
     -webkit-font-smoothing:antialiased;
   }
-  .wrap{max-width:1080px; margin:0 auto; padding:28px 20px 64px;}
+  .wrap{ max-width:1240px; margin:0 auto; padding:28px 20px 60px; }
+  header .kicker{ color:var(--gold); font-weight:700; letter-spacing:1px; font-size:14px; }
+  header h1{ color:var(--white); font-size:30px; margin:6px 0 4px; }
+  .meta{ color:var(--muted); font-size:13px; }
+  .overall{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:18px 20px; margin:18px 0 10px; line-height:1.7; color:var(--body); font-size:15.5px;
+  }
+  .overall b{ color:var(--gold); }
+  .legend{ display:flex; gap:16px; flex-wrap:wrap; font-size:12.5px; color:var(--muted); margin:6px 2px 20px; }
+  .dot{ display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:5px; vertical-align:middle; }
 
-  header.masthead{
-    display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between;
-    gap:8px 24px; padding-bottom:18px; border-bottom:1px solid var(--border); margin-bottom:20px;
-  }
-  header.masthead h1{
-    font-family:"Noto Serif TC",serif; font-weight:700; font-size:26px; margin:0;
-    letter-spacing:0.01em;
-  }
-  header.masthead .meta{font-size:13px; color:var(--text-3); font-family:"IBM Plex Mono",monospace;}
-  header.masthead .disclaimer{
-    width:100%; font-size:12.5px; color:var(--text-3); margin-top:6px; line-height:1.6;
-  }
-
-  .overall-bar{
-    background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--gold);
-    border-radius:6px; padding:12px 16px; margin-bottom:20px; font-size:13.5px; line-height:1.7;
-    display:none;
-  }
-  .overall-bar .tag{font-size:10.5px; color:var(--gold); letter-spacing:0.06em; margin-bottom:4px; font-family:"IBM Plex Mono",monospace;}
-
-  .breadth{
-    display:flex; gap:1px; background:var(--border); border:1px solid var(--border);
-    border-radius:6px; overflow:hidden; margin-bottom:28px;
-  }
-  .breadth div{
-    flex:1; background:var(--surface); padding:12px 16px; text-align:center;
-  }
-  .breadth .num{font-family:"IBM Plex Mono",monospace; font-size:22px; font-weight:600; line-height:1;}
-  .breadth .lbl{font-size:12px; color:var(--text-3); margin-top:5px;}
-  .breadth .bull .num{color:var(--red-text);}
-  .breadth .bear .num{color:var(--green-text);}
-  .breadth .flat .num{color:var(--neutral);}
-
-  .grid{display:grid; grid-template-columns:1fr; gap:16px;}
-  @media(min-width:760px){.grid{grid-template-columns:1fr 1fr;}}
+  /* ── 版面：手機 1 欄、桌機最多 2 欄，讓每張卡片與圖都寬 ── */
+  .grid{ display:grid; grid-template-columns:1fr; gap:20px; }
+  @media (min-width:1000px){ .grid{ grid-template-columns:1fr 1fr; } }
 
   .card{
-    background:var(--surface); border:1px solid var(--border); border-radius:10px;
-    padding:18px 20px 20px; opacity:0; transform:translateY(6px);
-    animation:rise 0.5s ease forwards;
+    background:var(--card); border:1px solid var(--line); border-radius:16px;
+    padding:18px 18px 16px; display:flex; flex-direction:column; gap:12px;
   }
-  @media (prefers-reduced-motion: reduce){.card{animation:none; opacity:1; transform:none;}}
-  @keyframes rise{to{opacity:1; transform:none;}}
-
-  .card-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
-  .symbol{font-family:"Noto Serif TC",serif; font-size:22px; font-weight:700;}
-  .asof{font-size:11.5px; color:var(--text-3); font-family:"IBM Plex Mono",monospace; margin-top:2px;}
-  .badge{
-    font-size:12.5px; font-weight:600; padding:4px 12px; border-radius:100px;
-    font-family:"Noto Sans TC",sans-serif;
+  .card.err{ opacity:.7; }
+  .card-top{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .sym{ font-size:22px; font-weight:800; color:var(--white); letter-spacing:.5px; }
+  .badge{ font-size:13px; font-weight:800; padding:5px 12px; border-radius:999px; color:#12203b; white-space:nowrap; }
+  .b-up{ background:var(--up); color:#fff; }
+  .b-down{ background:var(--down); color:#fff; }
+  .b-flat{ background:var(--flat); color:#12203b; }
+  .price{ font-size:15px; color:var(--body); }
+  .price .close{ color:var(--white); font-weight:700; font-size:20px; }
+  .stats{ display:grid; grid-template-columns:repeat(2,1fr); gap:8px 14px; }
+  .stat{ background:var(--card2); border-radius:10px; padding:8px 11px; }
+  .stat .k{ font-size:11.5px; color:var(--muted); }
+  .stat .v{ font-size:16px; font-weight:700; color:var(--white); margin-top:2px; }
+  .v.pos{ color:var(--up); } .v.neg{ color:var(--down); }
+  .rsi-hot{ color:var(--up); } .rsi-cold{ color:var(--down); }
+  .chart-tabs{ display:flex; gap:6px; margin-bottom:-2px; }
+  .chart-tabs .tab{
+    font:inherit; font-size:12.5px; font-weight:700; cursor:pointer;
+    color:var(--body); background:var(--card2); border:1px solid var(--line);
+    border-bottom:none; border-radius:8px 8px 0 0; padding:6px 14px;
   }
-  .badge.bull{background:var(--red-bg); color:var(--red-text);}
-  .badge.bear{background:var(--green-bg); color:var(--green-text);}
-  .badge.flat{background:var(--neutral-bg); color:var(--neutral);}
-
-  .stat-row{
-    display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:16px;
-  }
-  .stat{background:var(--surface-2); border-radius:6px; padding:8px 10px;}
-  .stat .l{font-size:11px; color:var(--text-3); margin-bottom:3px;}
-  .stat .v{font-family:"IBM Plex Mono",monospace; font-size:15px; font-weight:600;}
-  .stat .v.up{color:var(--red-text);}
-  .stat .v.down{color:var(--green-text);}
-
-  .gauge-block{margin-bottom:16px;}
-  .gauge-label{
-    display:flex; justify-content:space-between; font-size:11.5px; color:var(--text-3);
-    margin-bottom:5px; font-family:"IBM Plex Mono",monospace;
-  }
-  .gauge-track{
-    position:relative; height:8px; border-radius:4px; overflow:hidden;
-    background:linear-gradient(90deg, var(--green) 0%, var(--green) 30%, var(--neutral) 30%, var(--neutral) 70%, var(--red) 70%, var(--red) 100%);
-    opacity:0.85;
-  }
-  .gauge-marker{
-    position:absolute; top:-3px; width:2px; height:14px; background:var(--text);
-    border-radius:1px; transform:translateX(-1px);
-  }
-
-  .charts{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px;}
-  .charts figure{margin:0; background:var(--surface-2); border-radius:6px; overflow:hidden; border:1px solid var(--border);}
-  .charts img{display:block; width:100%; height:auto; background:#fff;}
-  .charts figcaption{
-    font-size:11px; color:var(--text-3); padding:6px 8px; border-top:1px solid var(--border);
-  }
-  .chart-fallback{
-    display:flex; align-items:center; justify-content:center; height:120px;
-    color:var(--text-3); font-size:12px; text-align:center; padding:8px;
-  }
-
-  .ai-summary{
-    border-left:2px solid var(--gold); padding:10px 14px; background:var(--surface-2);
-    border-radius:0 6px 6px 0;
-  }
-  .ai-summary .tag{
-    font-size:10.5px; color:var(--gold); letter-spacing:0.06em; margin-bottom:4px;
-    font-family:"IBM Plex Mono",monospace;
-  }
-  .ai-summary p{
-    margin:0; font-family:"Noto Serif TC",serif; font-size:14.5px; line-height:1.7; color:var(--text);
-  }
-
-  .reasons{margin-top:12px; font-size:12px; color:var(--text-3); line-height:1.8;}
-  .reasons span{
-    display:inline-block; background:var(--surface-2); border:1px solid var(--border);
-    padding:2px 8px; border-radius:100px; margin:2px 4px 0 0;
-  }
-
-  footer{
-    margin-top:32px; padding-top:16px; border-top:1px solid var(--border);
-    font-size:12px; color:var(--text-3); line-height:1.8;
-  }
+  .chart-tabs .tab.active{ background:var(--gold); color:#12203b; border-color:var(--gold); }
+  .chart-tabs .tab:disabled{ opacity:.4; cursor:not-allowed; }
+  /* 一次只顯示一張大圖，圖用滿卡片寬度、拉高，點圖可放大 */
+  .chart{ border-radius:0 10px 10px 10px; overflow:hidden; background:#f5f7fb; border:1px solid var(--line); min-height:260px; }
+  .chart img{ display:block; width:100%; height:auto; cursor:zoom-in; }
+  .chart .noimg{ padding:60px 10px; text-align:center; color:#6b7890; font-size:12.5px; }
+  .chart-hint{ font-size:11.5px; color:var(--muted); margin:6px 2px 0; }
+  .ai{ background:var(--card2); border-left:3px solid var(--gold); border-radius:8px; padding:11px 13px; font-size:13.5px; line-height:1.65; color:var(--body); }
+  .ai .tag{ color:var(--gold); font-weight:700; font-size:12px; display:block; margin-bottom:3px; }
+  .err-msg{ color:var(--muted); font-size:13px; }
+  footer{ margin-top:34px; text-align:center; color:var(--muted); font-size:12.5px; line-height:1.7; }
+  .src{ color:#5f6f8c; }
+  @media (max-width:520px){ header h1{ font-size:24px; } .wrap{ padding:20px 14px 48px; } }
 </style>
 </head>
 <body>
 <div class="wrap">
-
-  <header class="masthead">
-    <h1>信安 · 每日盤後技術面速覽</h1>
-    <div class="meta" id="generatedAt">載入中…</div>
-    <div class="disclaimer">走勢標籤與技術指標為 n8n workflow 客觀規則運算結果，可能有假訊號；AI 摘要僅將已算好的數字轉為白話文字，不做投資建議、不做預測，僅供個人資料彙整參考。</div>
+  <header>
+    <div class="kicker">DAILY MARKET DASHBOARD</div>
+    <h1>個股技術走勢儀表板</h1>
+    <div class="meta" id="meta">更新時間載入中…</div>
   </header>
 
-  <div class="overall-bar" id="overallBar"></div>
+  <div class="overall" id="overall"></div>
 
-  <div class="breadth" id="breadthBar"></div>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--up)"></span>多頭（紅）</span>
+    <span><span class="dot" style="background:var(--down)"></span>空頭（綠）</span>
+    <span><span class="dot" style="background:var(--flat)"></span>盤整</span>
+    <span class="src">走勢為技術指標客觀輸出，紅漲綠跌</span>
+  </div>
 
-  <div class="grid" id="cardGrid"></div>
+  <div class="grid" id="grid"></div>
 
   <footer>
-    資料來源：Twelve Data（日線）／指標運算：n8n Code 節點（MA5·MA20·RSI14·MACD 12,26,9）／圖表：QuickChart／白話摘要：Claude API。<br>
-    每天由 n8n 排程自動更新 <code>data.json</code>，此頁面每次開啟都會讀取最新資料。
+    走勢標籤為技術指標的客觀規則輸出，會有假訊號，屬輔助判讀、<b>非預測、非投資建議</b>。<br/>
+    資料由 n8n 每日自動彙整 · 指標在 n8n 客觀計算 · AI 僅做白話解讀
   </footer>
-
 </div>
 
 <script>
-const SAMPLE_DATA = {
-  generatedAt: new Date().toISOString(),
-  overall: null,
-  note: "走勢標籤為技術指標客觀輸出，會有假訊號，非預測、非投資建議",
-  count: 3,
-  items: [
-    {
-      symbol: "AAPL", ok: true, trend: "多頭", close: 314.58,
-      ma5: 311.52, ma20: 309.32, rsi14: 52.57, macdHist: 0.41,
-      candleChartUrl: "", maChartUrl: "",
-      aiComment: "蘋果收在314.58，短期均線在長期均線上方，動能指標呈中性，看起來是多頭格局。",
-      error: null
-    },
-    {
-      symbol: "MSFT", ok: true, trend: "多頭", close: 505.06,
-      ma5: 492.74, ma20: 490.91, rsi14: 70.47, macdHist: -2.17,
-      candleChartUrl: "", maChartUrl: "",
-      aiComment: "微軟收在505.06，短期均線領先長期均線，動能偏強，但柱狀圖轉負，維持多頭但有變化。",
-      error: null
-    },
-    {
-      symbol: "NVDA", ok: true, trend: "盤整", close: 225.16,
-      ma5: 221.92, ma20: 210.39, rsi14: 63.04, macdHist: 2.04,
-      candleChartUrl: "", maChartUrl: "",
-      aiComment: "輝達呈現盤整走勢，均線糾結、RSI 中性，短線方向不明。",
-      error: null
-    }
+// 若 data.json 讀不到（例如直接雙擊本機開啟、或還沒上傳），先用這份範例讓版面看得到。
+const SAMPLE = {
+  "generatedAt":"2026-08-23T08:00:00+08:00",
+  "overall":"（範例資料）今日整體偏多：蘋果站上均線、台積電區間整理，微軟走弱。以上為技術指標客觀整理，非投資建議。",
+  "note":"走勢標籤為技術指標客觀輸出，會有假訊號，非預測、非投資建議",
+  "count":3,
+  "items":[
+    {"symbol":"AAPL","ok":true,"trend":"多頭","close":226.5,"ma5":225.2,"ma20":224.7,"rsi14":61.2,"macdHist":0.15,"candleChartUrl":null,"maChartUrl":null,"aiComment":"站上 20 日線、RSI 偏強，屬多頭；MACD 柱狀翻正，短線動能偏強。","error":null},
+    {"symbol":"MSFT","ok":true,"trend":"空頭","close":410.1,"ma5":405,"ma20":412.3,"rsi14":38.4,"macdHist":-0.22,"candleChartUrl":null,"maChartUrl":null,"aiComment":"跌破均線、RSI 偏弱，偏空頭，留意反彈是否站回 MA20。","error":null},
+    {"symbol":"2330","ok":true,"trend":"盤整","close":1005,"ma5":998,"ma20":1002,"rsi14":52,"macdHist":0.4,"candleChartUrl":null,"maChartUrl":null,"aiComment":"均線糾結、RSI 中性，區間盤整，方向未明。","error":null}
   ]
 };
 
-function trendClass(trend){
-  if (trend === "多頭") return "bull";
-  if (trend === "空頭") return "bear";
-  return "flat";
-}
-function fmtNum(v, digits){
-  if (v === null || v === undefined || Number.isNaN(v)) return "—";
-  return Number(v).toFixed(digits === undefined ? 2 : digits);
-}
+function fmt(n){ return (n===null||n===undefined||isNaN(n)) ? "—" : (Math.round(n*100)/100).toLocaleString(); }
+function trendClass(t){ return t==="多頭" ? "b-up" : t==="空頭" ? "b-down" : "b-flat"; }
 function fmtTime(iso){
-  try{
-    const d = new Date(iso);
-    return d.toLocaleString('zh-TW', { year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit' }) + ' 產生';
-  }catch(e){ return iso || ''; }
-}
-// 相容兩種資料格式：items（aiComment）或 results（summary）
-function normalizeList(data){
-  const list = Array.isArray(data.items) ? data.items : (Array.isArray(data.results) ? data.results : []);
-  return list.map(r => ({
-    symbol: r.symbol,
-    ok: r.ok !== false,
-    asOf: r.asOf || null,
-    close: r.close ?? null,
-    ma5: r.ma5 ?? null,
-    ma20: r.ma20 ?? null,
-    rsi14: r.rsi14 ?? null,
-    macdHist: r.macdHist ?? null,
-    trend: r.trend || '資料不足',
-    trendReasons: r.trendReasons || null,
-    maChartUrl: r.maChartUrl || null,
-    candleChartUrl: r.candleChartUrl || null,
-    summary: r.aiComment || r.summary || null,
-    error: r.error || null
-  }));
+  if(!iso) return "—";
+  try{ const d=new Date(iso); if(isNaN(d)) return iso;
+    const p=(x)=>String(x).padStart(2,"0");
+    return d.getFullYear()+" / "+p(d.getMonth()+1)+" / "+p(d.getDate())+"  "+p(d.getHours())+":"+p(d.getMinutes());
+  }catch(e){ return iso; }
 }
 
-function renderOverall(data){
-  const el = document.getElementById('overallBar');
-  if (data.overall) {
-    el.style.display = 'block';
-    el.innerHTML = `<div class="tag">整體概況</div><div>${data.overall}</div>`;
-  } else {
-    el.style.display = 'none';
-  }
-}
-
-function renderBreadth(list){
-  const bull = list.filter(r => r.trend === '多頭').length;
-  const bear = list.filter(r => r.trend === '空頭').length;
-  const flat = list.length - bull - bear;
-  document.getElementById('breadthBar').innerHTML = `
-    <div class="bull"><div class="num">${bull}</div><div class="lbl">多頭</div></div>
-    <div class="flat"><div class="num">${flat}</div><div class="lbl">盤整</div></div>
-    <div class="bear"><div class="num">${bear}</div><div class="lbl">空頭</div></div>
-  `;
-}
-
-function chartFigure(url, label){
-  if (!url) {
-    return `<figure><div class="chart-fallback">${label}（尚無圖表網址）</div></figure>`;
-  }
-  return `<figure><img src="${url}" alt="${label}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=chart-fallback>${label}圖表載入失敗，可能是連結已過期</div>'"><figcaption>${label}</figcaption></figure>`;
-}
-
-function renderCards(list){
-  const grid = document.getElementById('cardGrid');
-  grid.innerHTML = list.map((r, i) => {
-    if (!r.ok) {
-      return `<div class="card" style="animation-delay:${i * 60}ms">
-        <div class="card-head"><span class="symbol">${r.symbol}</span><span class="badge flat">資料不足</span></div>
-        <div style="color:var(--text-3); font-size:13px;">${r.error || '這檔目前沒有足夠資料可以判斷，稍後重新執行 workflow 看看。'}</div>
-      </div>`;
+function render(data){
+  document.getElementById("meta").textContent = "更新時間：" + fmtTime(data.generatedAt) + "　·　共 " + (data.count ?? (data.items||[]).length) + " 檔";
+  const ov = document.getElementById("overall");
+  if(data.overall){ ov.innerHTML = "<b>今日整體：</b>" + data.overall; ov.style.display=""; }
+  else { ov.style.display="none"; }
+  const grid = document.getElementById("grid");
+  grid.innerHTML = "";
+  (data.items||[]).forEach(it=>{
+    const card = document.createElement("div");
+    card.className = "card" + (it.error ? " err" : "");
+    if(it.error){
+      card.innerHTML = '<div class="card-top"><span class="sym">'+it.symbol+'</span><span class="badge b-flat">資料異常</span></div>'
+        + '<div class="err-msg">'+it.error+'</div>';
+      grid.appendChild(card); return;
     }
-    const tc = trendClass(r.trend);
-    const rsiPos = Math.max(0, Math.min(100, r.rsi14 == null ? 50 : r.rsi14));
-    return `<div class="card" style="animation-delay:${i * 60}ms">
-      <div class="card-head">
-        <div>
-          <div class="symbol">${r.symbol}</div>
-          ${r.asOf ? `<div class="asof">${r.asOf} 收盤</div>` : ''}
-        </div>
-        <span class="badge ${tc}">${r.trend}</span>
-      </div>
-
-      <div class="stat-row">
-        <div class="stat"><div class="l">收盤</div><div class="v">${fmtNum(r.close)}</div></div>
-        <div class="stat"><div class="l">MA5 / MA20</div><div class="v">${fmtNum(r.ma5)} / ${fmtNum(r.ma20)}</div></div>
-        <div class="stat"><div class="l">RSI(14)</div><div class="v ${r.rsi14 >= 55 ? 'up' : (r.rsi14 <= 45 ? 'down' : '')}">${fmtNum(r.rsi14, 1)}</div></div>
-        <div class="stat"><div class="l">MACD 柱</div><div class="v ${r.macdHist > 0 ? 'up' : (r.macdHist < 0 ? 'down' : '')}">${fmtNum(r.macdHist, 2)}</div></div>
-      </div>
-
-      <div class="gauge-block">
-        <div class="gauge-label"><span>超賣</span><span>RSI 動能</span><span>超買</span></div>
-        <div class="gauge-track"><div class="gauge-marker" style="left:${rsiPos}%"></div></div>
-      </div>
-
-      <div class="charts">
-        ${chartFigure(r.candleChartUrl, 'K線')}
-        ${chartFigure(r.maChartUrl, '均線')}
-      </div>
-
-      <div class="ai-summary">
-        <div class="tag">AI 白話解讀</div>
-        <p>${r.summary || '（尚未產生摘要）'}</p>
-      </div>
-
-      ${r.trendReasons ? `<div class="reasons">${r.trendReasons.map(x => `<span>${x}</span>`).join('')}</div>` : ''}
-    </div>`;
-  }).join('');
+    const histCls = (it.macdHist>0)?"pos":(it.macdHist<0)?"neg":"";
+    const rsiCls = (it.rsi14>=70)?"rsi-hot":(it.rsi14<=30)?"rsi-cold":"";
+    const candle = it.candleChartUrl || null;
+    const ma = it.maChartUrl || it.chartUrl || null;  // 相容舊欄位 chartUrl
+    const first = candle || ma;                        // 預設優先顯示 K棒
+    const chart = first
+      ? '<div class="chart-tabs">'
+          +'<button type="button" class="tab'+(candle?' active':'')+'" data-view="candle"'+(candle?'':' disabled')+'>K棒</button>'
+          +'<button type="button" class="tab'+(!candle&&ma?' active':'')+'" data-view="ma"'+(ma?'':' disabled')+'>均線</button>'
+        +'</div>'
+        +'<div class="chart"><img loading="lazy" class="chart-img" src="'+first+'"'
+          +' data-candle="'+(candle||'')+'" data-ma="'+(ma||'')+'"'
+          +' alt="'+it.symbol+' 走勢圖" title="點圖可放大檢視"'
+          +' onerror="this.parentNode.innerHTML=&quot;<div class=noimg>圖表載入失敗（可點對應 chartUrl 檢視）</div>&quot;"/></div>'
+        +'<div class="chart-hint">用上方分頁切換 K棒／均線 · 點圖可放大</div>'
+      : '<div class="chart"><div class="noimg">（範例無圖，實際跑會帶入 QuickChart 的 K棒 / 均線圖）</div></div>';
+    card.innerHTML =
+      '<div class="card-top"><span class="sym">'+it.symbol+'</span>'
+        +'<span class="badge '+trendClass(it.trend)+'">'+(it.trend||"—")+'</span></div>'
+      +'<div class="price">收盤 <span class="close">'+fmt(it.close)+'</span></div>'
+      +'<div class="stats">'
+        +'<div class="stat"><div class="k">MA5</div><div class="v">'+fmt(it.ma5)+'</div></div>'
+        +'<div class="stat"><div class="k">MA20</div><div class="v">'+fmt(it.ma20)+'</div></div>'
+        +'<div class="stat"><div class="k">RSI(14)</div><div class="v '+rsiCls+'">'+fmt(it.rsi14)+'</div></div>'
+        +'<div class="stat"><div class="k">MACD 柱狀</div><div class="v '+histCls+'">'+fmt(it.macdHist)+'</div></div>'
+      +'</div>'
+      + chart
+      + (it.aiComment ? '<div class="ai"><span class="tag">AI 白話解讀</span>'+it.aiComment+'</div>' : '');
+    grid.appendChild(card);
+  });
 }
 
-async function init(){
-  let data = SAMPLE_DATA;
-  let usedSample = true;
-  try{
-    const res = await fetch('./data.json', { cache: 'no-store' });
-    if (res.ok){
-      const real = await res.json();
-      if (real && (Array.isArray(real.items) || Array.isArray(real.results))) { data = real; usedSample = false; }
-    }
-  }catch(e){}
+// K棒 / 均線 切換
+document.getElementById("grid").addEventListener("click", function(e){
+  const btn = e.target.closest(".tab");
+  if(btn && !btn.disabled){
+    const card = btn.closest(".card");
+    const img = card.querySelector(".chart-img");
+    if(!img) return;
+    const url = btn.dataset.view === "candle" ? img.dataset.candle : img.dataset.ma;
+    if(!url) return;
+    img.src = url;
+    card.querySelectorAll(".chart-tabs .tab").forEach(t=>t.classList.toggle("active", t===btn));
+    return;
+  }
+  // 點圖：在新分頁開原圖，用瀏覽器看更大
+  const im = e.target.closest(".chart-img");
+  if(im && im.src){ window.open(im.src, "_blank", "noopener"); }
+});
 
-  const list = normalizeList(data);
-  document.getElementById('generatedAt').textContent =
-    (usedSample ? '範例資料 · ' : '') + fmtTime(data.generatedAt);
-  renderOverall(data);
-  renderBreadth(list);
-  renderCards(list);
-}
-init();
+fetch("data.json", { cache:"no-store" })
+  .then(r=>{ if(!r.ok) throw new Error("no data.json"); return r.json(); })
+  .then(render)
+  .catch(()=>{ render(SAMPLE); });
 </script>
 </body>
 </html>
