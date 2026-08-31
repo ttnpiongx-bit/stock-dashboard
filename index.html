@@ -9,8 +9,8 @@
   :root{
     --bg:#1B2A4A; --card:#253660; --card2:#1F3050;
     --gold:#F5C518; --body:#C0CCDD; --muted:#7C8BA5; --white:#FFFFFF;
-    --up:#E4572E;   /* 漲/多頭＝紅 */
-    --down:#27AE60; /* 跌/空頭＝綠 */
+    --up:#27AE60;   /* 漲/多頭＝綠（綠漲紅跌） */
+    --down:#E4572E; /* 跌/空頭＝紅 */
     --flat:#7C8BA5;
     --line:#33456b;
   }
@@ -65,6 +65,7 @@
   .chart-tabs .tab:disabled{ opacity:.4; cursor:not-allowed; }
   /* 一次只顯示一張大圖，圖用滿卡片寬度、拉高，點圖可放大 */
   .chart{ border-radius:0 10px 10px 10px; overflow:hidden; background:#f5f7fb; border:1px solid var(--line); min-height:260px; }
+  .chart.single{ border-radius:10px; background:#1B2A4A; }
   .chart img{ display:block; width:100%; height:auto; cursor:zoom-in; }
   .chart .noimg{ padding:60px 10px; text-align:center; color:#6b7890; font-size:12.5px; }
   .chart-hint{ font-size:11.5px; color:var(--muted); margin:6px 2px 0; }
@@ -87,10 +88,10 @@
   <div class="overall" id="overall"></div>
 
   <div class="legend">
-    <span><span class="dot" style="background:var(--up)"></span>多頭（紅）</span>
-    <span><span class="dot" style="background:var(--down)"></span>空頭（綠）</span>
+    <span><span class="dot" style="background:var(--up)"></span>多頭（綠）</span>
+    <span><span class="dot" style="background:var(--down)"></span>空頭（紅）</span>
     <span><span class="dot" style="background:var(--flat)"></span>盤整</span>
-    <span class="src">走勢為技術指標客觀輸出，紅漲綠跌</span>
+    <span class="src">走勢為技術指標客觀輸出，綠漲紅跌</span>
   </div>
 
   <div class="grid" id="grid"></div>
@@ -142,20 +143,31 @@ function render(data){
     }
     const histCls = (it.macdHist>0)?"pos":(it.macdHist<0)?"neg":"";
     const rsiCls = (it.rsi14>=70)?"rsi-hot":(it.rsi14<=30)?"rsi-cold":"";
+    const combo = it.comboChartUrl || null;            // K棒×均線 合併圖（新版主圖）
     const candle = it.candleChartUrl || null;
-    const ma = it.maChartUrl || it.chartUrl || null;  // 相容舊欄位 chartUrl
-    const first = candle || ma;                        // 預設優先顯示 K棒
-    const chart = first
-      ? '<div class="chart-tabs">'
-          +'<button type="button" class="tab'+(candle?' active':'')+'" data-view="candle"'+(candle?'':' disabled')+'>K棒</button>'
-          +'<button type="button" class="tab'+(!candle&&ma?' active':'')+'" data-view="ma"'+(ma?'':' disabled')+'>均線</button>'
-        +'</div>'
-        +'<div class="chart"><img loading="lazy" class="chart-img" src="'+first+'"'
-          +' data-candle="'+(candle||'')+'" data-ma="'+(ma||'')+'"'
-          +' alt="'+it.symbol+' 走勢圖" title="點圖可放大檢視"'
-          +' onerror="this.parentNode.innerHTML=&quot;<div class=noimg>圖表載入失敗（可點對應 chartUrl 檢視）</div>&quot;"/></div>'
-        +'<div class="chart-hint">用上方分頁切換 K棒／均線 · 點圖可放大</div>'
-      : '<div class="chart"><div class="noimg">（範例無圖，實際跑會帶入 QuickChart 的 K棒 / 均線圖）</div></div>';
+    const ma = it.maChartUrl || it.chartUrl || null;   // 相容舊欄位 chartUrl
+    let chart;
+    if(combo){
+      // 一張合併圖：K棒 + MA5 + MA20 疊在一起
+      chart = '<div class="chart single"><img loading="lazy" class="chart-img" src="'+combo+'"'
+          +' alt="'+it.symbol+' K棒×均線" title="點圖可放大檢視"'
+          +' onerror="this.parentNode.innerHTML=&quot;<div class=noimg>圖表載入失敗</div>&quot;"/></div>'
+        +'<div class="chart-hint">K棒 × 均線疊圖 · 點圖可放大</div>';
+    } else {
+      // 相容舊資料：K棒 / 均線 分頁切換
+      const first = ma || candle;
+      chart = first
+        ? '<div class="chart-tabs">'
+            +'<button type="button" class="tab'+(ma?' active':'')+'" data-view="ma"'+(ma?'':' disabled')+'>均線</button>'
+            +'<button type="button" class="tab'+(!ma&&candle?' active':'')+'" data-view="candle"'+(candle?'':' disabled')+'>K棒</button>'
+          +'</div>'
+          +'<div class="chart"><img loading="lazy" class="chart-img" src="'+first+'"'
+            +' data-candle="'+(candle||'')+'" data-ma="'+(ma||'')+'"'
+            +' alt="'+it.symbol+' 走勢圖" title="點圖可放大檢視"'
+            +' onerror="this.parentNode.innerHTML=&quot;<div class=noimg>圖表載入失敗（可點對應 chartUrl 檢視）</div>&quot;"/></div>'
+          +'<div class="chart-hint">用上方分頁切換 K棒／均線 · 點圖可放大</div>'
+        : '<div class="chart"><div class="noimg">（範例無圖，實際跑會帶入 QuickChart 的 K棒×均線 疊圖）</div></div>';
+    }
     card.innerHTML =
       '<div class="card-top"><span class="sym">'+it.symbol+'</span>'
         +'<span class="badge '+trendClass(it.trend)+'">'+(it.trend||"—")+'</span></div>'
