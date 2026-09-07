@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-07T21:08:30.129+08:00",
+  "generatedAt": "2026-09-07T21:38:52.939+08:00",
   "overall": null,
   "note": "走勢標籤為技術指標客觀輸出，會有假訊號，非預測、非投資建議",
   "flowNote": "資金流向＝三大法人買賣超（真實，FinMind）；金額 ≈ 淨買超股數 × 收盤價。板塊為法人淨買超依產業彙整。",
@@ -8,33 +8,33 @@
   "sectors": [
     {
       "sector": "半導體",
-      "x": -3951511200,
-      "y": -7778626920,
-      "size": 16630721202,
-      "netFlow": -4913401680,
+      "x": 26256480360,
+      "y": 14491382760,
+      "size": 48486587001,
+      "netFlow": 40560071640,
       "symbols": [
-        "大立光"
+        "台積電"
       ]
     }
   ],
   "items": [
     {
-      "symbol": "大立光",
-      "stock_id": "3008",
+      "symbol": "台積電",
+      "stock_id": "2330",
       "ok": true,
       "trend": "多頭",
-      "close": 6660,
-      "ma5": 7320,
-      "ma20": 6043.5,
-      "rsi14": 59.08,
-      "macdHist": 65.4,
-      "netFlowEst": -4913401680,
-      "netSharesToday": -737748,
+      "close": 2460,
+      "ma5": 2417,
+      "ma20": 2403.25,
+      "rsi14": 57.92,
+      "macdHist": 3.23,
+      "netFlowEst": 40560071640,
+      "netSharesToday": 16487834,
       "sector": "半導體",
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-584c52e9-4d34-434a-b196-d2eebe76aa8c",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-46c893f6-1b28-4698-9211-7093196baff1",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "大立光多頭走勢持續，RSI偏強、MACD柱狀轉正，但今天三大法人反而賣超約49億元，現價6660靠近月線支撐。",
+      "aiComment": "台積電在多頭格局中走強，收在2460元，短期均線站上長期均線，RSI偏強勢，MACD柱狀為正，三大法人今天買超約405.6億元。",
       "error": null
     }
   ]
