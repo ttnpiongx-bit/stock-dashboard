@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-07T20:36:51.293+08:00",
+  "generatedAt": "2026-09-07T21:08:30.129+08:00",
   "overall": null,
   "note": "走勢標籤為技術指標客觀輸出，會有假訊號，非預測、非投資建議",
   "flowNote": "資金流向＝三大法人買賣超（真實，FinMind）；金額 ≈ 淨買超股數 × 收盤價。板塊為法人淨買超依產業彙整。",
@@ -31,10 +31,10 @@
       "netFlowEst": -4913401680,
       "netSharesToday": -737748,
       "sector": "半導體",
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-b650a56b-a7ef-44b0-aeee-acbe3178673a",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-584c52e9-4d34-434a-b196-d2eebe76aa8c",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "大立光現在多頭走勢，短期均線在長期均線上方、RSI偏強、MACD柱狀為正都顯示強勢，不過三大法人今天賣超約49.1億，有點減碼的意思。",
+      "aiComment": "大立光多頭走勢持續，RSI偏強、MACD柱狀轉正，但今天三大法人反而賣超約49億元，現價6660靠近月線支撐。",
       "error": null
     }
   ]
