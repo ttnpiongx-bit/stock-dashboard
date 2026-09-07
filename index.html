@@ -31,6 +31,18 @@
   .overall b{ color:var(--gold); }
   .legend{ display:flex; gap:16px; flex-wrap:wrap; font-size:12.5px; color:var(--muted); margin:6px 2px 20px; }
   .dot{ display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:5px; vertical-align:middle; }
+  /* 資金熱門板塊 */
+  .sectors{ background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 18px; margin:6px 0 18px; }
+  .sec-title{ color:var(--gold); font-weight:700; font-size:15.5px; margin-bottom:12px; }
+  .sec-row{ display:flex; align-items:center; gap:12px; margin:8px 0; }
+  .sec-name{ width:70px; color:var(--white); font-size:14px; font-weight:600; flex:none; }
+  .sec-bar{ flex:1; height:16px; background:var(--card2); border-radius:8px; overflow:hidden; }
+  .sec-fill{ height:100%; border-radius:8px; min-width:2px; }
+  .sec-val{ width:110px; text-align:right; font-size:13px; font-weight:700; flex:none; }
+  .sec-hint{ color:var(--muted); font-size:11.5px; margin-top:10px; }
+  .sector-tag{ font-size:11px; color:var(--muted); background:var(--card2); padding:2px 9px; border-radius:999px; margin-left:8px; vertical-align:middle; }
+  .flow{ font-size:13.5px; font-weight:700; padding:8px 11px; border-radius:8px; background:var(--card2); }
+  .flow.in{ color:var(--up); } .flow.out{ color:var(--down); }
 
   /* ── 版面：手機 1 欄、桌機最多 2 欄，讓每張卡片與圖都寬 ── */
   .grid{ display:grid; grid-template-columns:1fr; gap:20px; }
@@ -94,6 +106,8 @@
     <span class="src">走勢為技術指標客觀輸出，綠漲紅跌</span>
   </div>
 
+  <div class="sectors" id="sectors" style="display:none"></div>
+
   <div class="grid" id="grid"></div>
 
   <footer>
@@ -104,19 +118,102 @@
 
 <script>
 // 若 data.json 讀不到（例如直接雙擊本機開啟、或還沒上傳），先用這份範例讓版面看得到。
+const DEMO_CHART = "data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560"><rect width="1000" height="560" fill="#1B2A4A"/><text x="500" y="285" font-size="34" fill="#8494AD" text-anchor="middle" font-family="sans-serif">K棒 × 均線 疊圖（範例）</text><text x="500" y="330" font-size="18" fill="#5f6f8c" text-anchor="middle" font-family="sans-serif">實際跑工作流會帶入真實圖表</text></svg>');
 const SAMPLE = {
-  "generatedAt":"2026-08-23T08:00:00+08:00",
-  "overall":"（範例資料）今日整體偏多：蘋果站上均線、台積電區間整理，微軟走弱。以上為技術指標客觀整理，非投資建議。",
+  "generatedAt":"2026-09-07T18:00:00+08:00",
+  "overall":"（範例資料）此為內建示範，實際數字會由 n8n 每日更新（台股三大法人買賣超）。以上為技術指標客觀整理，非投資建議。",
   "note":"走勢標籤為技術指標客觀輸出，會有假訊號，非預測、非投資建議",
-  "count":3,
+  "flowNote":"資金流向＝三大法人買賣超（真實，FinMind）；金額 ≈ 淨買超股數 × 收盤價。",
+  "market":"TW",
+  "count":12,
+  "sectors":[
+    {"sector":"半導體","x":1.8e10,"y":8e9,"size":1.5e11,"netFlow":1.8e10,"symbols":["台積電","聯發科"]},
+    {"sector":"航運","x":4e9,"y":2e9,"size":4e10,"netFlow":4e9,"symbols":["長榮"]},
+    {"sector":"電子零組件","x":2.8e9,"y":1e9,"size":5e10,"netFlow":2.8e9,"symbols":["鴻海","台達電"]},
+    {"sector":"通信網路","x":2e8,"y":1e8,"size":1e10,"netFlow":2e8,"symbols":["中華電"]},
+    {"sector":"食品","x":1e8,"y":-2e8,"size":6e9,"netFlow":1e8,"symbols":["統一"]},
+    {"sector":"鋼鐵","x":-3e8,"y":-4e8,"size":8e9,"netFlow":-3e8,"symbols":["中鋼"]},
+    {"sector":"電腦及週邊","x":-5e8,"y":-1e9,"size":2e10,"netFlow":-5e8,"symbols":["廣達"]},
+    {"sector":"塑膠","x":-6e8,"y":-3e8,"size":1e10,"netFlow":-6e8,"symbols":["台塑"]},
+    {"sector":"金融保險","x":-2e9,"y":-1e9,"size":3e10,"netFlow":-2e9,"symbols":["國泰金","富邦金"]}
+  ],
   "items":[
-    {"symbol":"AAPL","ok":true,"trend":"多頭","close":226.5,"ma5":225.2,"ma20":224.7,"rsi14":61.2,"macdHist":0.15,"candleChartUrl":null,"maChartUrl":null,"aiComment":"站上 20 日線、RSI 偏強，屬多頭；MACD 柱狀翻正，短線動能偏強。","error":null},
-    {"symbol":"MSFT","ok":true,"trend":"空頭","close":410.1,"ma5":405,"ma20":412.3,"rsi14":38.4,"macdHist":-0.22,"candleChartUrl":null,"maChartUrl":null,"aiComment":"跌破均線、RSI 偏弱，偏空頭，留意反彈是否站回 MA20。","error":null},
-    {"symbol":"2330","ok":true,"trend":"盤整","close":1005,"ma5":998,"ma20":1002,"rsi14":52,"macdHist":0.4,"candleChartUrl":null,"maChartUrl":null,"aiComment":"均線糾結、RSI 中性，區間盤整，方向未明。","error":null}
+    {"symbol":"台積電","stock_id":"2330","sector":"半導體","ok":true,"trend":"多頭","close":1100,"ma5":1070,"ma20":1035,"rsi14":68.2,"macdHist":8.4,"netFlowEst":1.5e10,"comboChartUrl":DEMO_CHART,"aiComment":"（範例）外資買超、站上均線，屬多頭。","error":null},
+    {"symbol":"聯發科","stock_id":"2454","sector":"半導體","ok":true,"trend":"多頭","close":1300,"ma5":1260,"ma20":1220,"rsi14":63.0,"macdHist":6.1,"netFlowEst":3e9,"comboChartUrl":DEMO_CHART,"aiComment":"（範例）法人買超、偏多。","error":null},
+    {"symbol":"鴻海","stock_id":"2317","sector":"電子零組件","ok":true,"trend":"多頭","close":210,"ma5":205,"ma20":198,"rsi14":61.0,"macdHist":1.2,"netFlowEst":2e9,"comboChartUrl":DEMO_CHART,"aiComment":"（範例）偏多。","error":null},
+    {"symbol":"台達電","stock_id":"2308","sector":"電子零組件","ok":true,"trend":"盤整","close":420,"ma5":418,"ma20":419,"rsi14":52.0,"macdHist":-0.2,"netFlowEst":8e8,"comboChartUrl":DEMO_CHART,"aiComment":"（範例）區間整理。","error":null},
+    {"symbol":"廣達","stock_id":"2382","sector":"電腦及週邊","ok":true,"trend":"空頭","close":300,"ma5":308,"ma20":315,"rsi14":43.0,"macdHist":-1.1,"netFlowEst":-5e8,"comboChartUrl":DEMO_CHART,"aiComment":"（範例）法人賣超、偏空。","error":null},
+    {"symbol":"中華電","stock_id":"2412","sector":"通信網路","ok":true,"trend":"盤整","close":130,"ma5":129,"ma20":130,"rsi14":50.0,"macdHist":0.05,"netFlowEst":2e8,"comboChartUrl":DEMO_CHART,"aiComment":"（範例）中性。","error":null},
+    {"symbol":"國泰金","stock_id":"2882","sector":"金融保險","ok":true,"trend":"空頭","close":65,"ma5":66,"ma20":68,"rsi14":44.0,"macdHist":-0.3,"netFlowEst":-1.2e9,"comboChartUrl":DEMO_CHART,"aiComment":"（範例）法人賣超、偏空。","error":null},
+    {"symbol":"富邦金","stock_id":"2881","sector":"金融保險","ok":true,"trend":"空頭","close":95,"ma5":97,"ma20":99,"rsi14":45.0,"macdHist":-0.4,"netFlowEst":-8e8,"comboChartUrl":DEMO_CHART,"aiComment":"（範例）偏空。","error":null},
+    {"symbol":"長榮","stock_id":"2603","sector":"航運","ok":true,"trend":"多頭","close":200,"ma5":190,"ma20":178,"rsi14":70.0,"macdHist":3.2,"netFlowEst":4e9,"comboChartUrl":DEMO_CHART,"aiComment":"（範例）法人買超、動能強。","error":null},
+    {"symbol":"台塑","stock_id":"1301","sector":"塑膠","ok":true,"trend":"空頭","close":45,"ma5":46,"ma20":47,"rsi14":41.0,"macdHist":-0.2,"netFlowEst":-6e8,"comboChartUrl":DEMO_CHART,"aiComment":"（範例）偏空。","error":null},
+    {"symbol":"中鋼","stock_id":"2002","sector":"鋼鐵","ok":true,"trend":"盤整","close":22,"ma5":22,"ma20":22.3,"rsi14":48.0,"macdHist":-0.05,"netFlowEst":-3e8,"comboChartUrl":DEMO_CHART,"aiComment":"（範例）區間整理。","error":null},
+    {"symbol":"統一","stock_id":"1216","sector":"食品","ok":true,"trend":"盤整","close":82,"ma5":81.5,"ma20":81,"rsi14":53.0,"macdHist":0.1,"netFlowEst":1e8,"comboChartUrl":DEMO_CHART,"aiComment":"（範例）中性偏多。","error":null}
   ]
 };
 
 function fmt(n){ return (n===null||n===undefined||isNaN(n)) ? "—" : (Math.round(n*100)/100).toLocaleString(); }
+function fmtFlow(n){ if(n===null||n===undefined||isNaN(n)) return "—"; const a=Math.abs(n); if(a>=1e8) return (a/1e8).toFixed(1)+"億"; if(a>=1e4) return Math.round(a/1e4)+"萬"; return Math.round(a).toLocaleString(); }
+// 資金板塊泡泡圖（仿 tide 潮汐）：x=資金流向、y=流速、size=金額，四象限
+function renderSectors(data){
+  const el = document.getElementById("sectors");
+  const secs = (data.sectors||[]).filter(s=>s && (s.x!=null || s.netFlow!=null));
+  if(!secs.length){ el.style.display="none"; return; }
+  el.style.display="";
+  // 相容：若沒有 x（舊資料），用 netFlow 當 x、其它給 0
+  secs.forEach(s=>{ if(s.x==null) s.x=s.netFlow||0; if(s.y==null) s.y=0; if(s.size==null) s.size=Math.abs(s.netFlow||0); });
+
+  const W=820,H=480,padL=60,padR=30,padT=45,padB=52;
+  const px0=padL,px1=W-padR,py0=padT,py1=H-padB;
+  const midX=(px0+px1)/2, midY=(py0+py1)/2, halfW=(px1-px0)/2, halfH=(py1-py0)/2;
+  const maxX=Math.max(1,...secs.map(s=>Math.abs(s.x||0)));
+  const maxY=Math.max(1,...secs.map(s=>Math.abs(s.y||0)));
+  const maxSize=Math.max(1,...secs.map(s=>Math.abs(s.size||0)));
+  const sgn=v=>v<0?-1:1;
+  const sx=v=>midX+sgn(v)*Math.sqrt(Math.abs(v)/maxX)*halfW*0.82;   // signed-sqrt：讓靠近 0 的也散得開
+  const sy=v=>midY-sgn(v)*Math.sqrt(Math.abs(v)/maxY)*halfH*0.82;
+  const sr=v=>10+Math.sqrt(Math.abs(v)/maxSize)*34;
+  const up="var(--up)", down="var(--down)", ql="rgba(192,204,221,0.5)", mut="var(--muted)";
+
+  let svg='<svg viewBox="0 0 '+W+' '+H+'" width="100%" style="display:block">';
+  svg+='<rect x="'+px0+'" y="'+py0+'" width="'+(px1-px0)+'" height="'+(py1-py0)+'" fill="none" stroke="rgba(255,255,255,0.08)"/>';
+  svg+='<line x1="'+midX+'" y1="'+py0+'" x2="'+midX+'" y2="'+py1+'" stroke="rgba(255,255,255,0.14)" stroke-dasharray="4 4"/>';
+  svg+='<line x1="'+px0+'" y1="'+midY+'" x2="'+px1+'" y2="'+midY+'" stroke="rgba(255,255,255,0.14)" stroke-dasharray="4 4"/>';
+  // 四象限標籤
+  svg+='<text x="'+(px1-8)+'" y="'+(py0+16)+'" text-anchor="end" font-size="13" fill="'+ql+'">漲潮加速</text>';
+  svg+='<text x="'+(px1-8)+'" y="'+(py1-8)+'" text-anchor="end" font-size="13" fill="'+ql+'">漲潮放緩</text>';
+  svg+='<text x="'+(px0+8)+'" y="'+(py1-8)+'" text-anchor="start" font-size="13" fill="'+ql+'">退潮加速</text>';
+  svg+='<text x="'+(px0+8)+'" y="'+(py0+16)+'" text-anchor="start" font-size="13" fill="'+ql+'">退潮放緩</text>';
+  // 軸向
+  svg+='<text x="'+midX+'" y="'+(py0-4)+'" text-anchor="middle" font-size="11" fill="'+mut+'">↑ 流速加快</text>';
+  svg+='<text x="'+midX+'" y="'+(py1+34)+'" text-anchor="middle" font-size="11" fill="'+mut+'">↓ 流速放緩</text>';
+  svg+='<text x="'+px1+'" y="'+(py1+20)+'" text-anchor="end" font-size="11" fill="'+mut+'">法人買超 →</text>';
+  svg+='<text x="'+px0+'" y="'+(py1+20)+'" text-anchor="start" font-size="11" fill="'+mut+'">← 法人賣超</text>';
+  // 泡泡：先算位置，做簡單防重疊，再畫
+  const nodes=secs.map(s=>({s, cx:sx(s.x||0), cy:sy(s.y||0), r:sr(s.size||0), col:(s.x||0)>=0?up:down}));
+  for(let iter=0; iter<90; iter++){
+    for(let i=0;i<nodes.length;i++) for(let j=i+1;j<nodes.length;j++){
+      const a=nodes[i], b=nodes[j]; let dx=b.cx-a.cx, dy=b.cy-a.cy; let d=Math.sqrt(dx*dx+dy*dy)||0.01; const min=a.r+b.r+6;
+      if(d<min){ const p=(min-d)/2, ux=dx/d, uy=dy/d; a.cx-=ux*p; a.cy-=uy*p; b.cx+=ux*p; b.cy+=uy*p; }
+    }
+    nodes.forEach(n=>{ n.cx=Math.max(px0+n.r, Math.min(px1-n.r, n.cx)); n.cy=Math.max(py0+n.r, Math.min(py1-n.r, n.cy)); });
+  }
+  nodes.sort((a,b)=>b.r-a.r); // 大的先畫，小的與標籤在上層
+  nodes.forEach(n=>{ const s=n.s;
+    const tip=s.sector+'：近5日 '+fmtFlow(s.x)+'、流速 '+fmtFlow(s.y)+'、金額 '+fmtFlow(s.size);
+    const ly = n.r>=20 ? n.cy+4 : n.cy-n.r-5;
+    svg+='<g><title>'+tip+'</title>';
+    svg+='<circle cx="'+n.cx.toFixed(1)+'" cy="'+n.cy.toFixed(1)+'" r="'+n.r.toFixed(1)+'" fill="'+n.col+'" fill-opacity="0.28" stroke="'+n.col+'" stroke-width="2"/>';
+    svg+='<text x="'+n.cx.toFixed(1)+'" y="'+ly.toFixed(1)+'" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">'+s.sector+'</text>';
+    svg+='</g>';
+  });
+  svg+='</svg>';
+
+  el.innerHTML = '<div class="sec-title">今日資金板塊泡泡圖（三大法人）</div>'+svg
+    +'<div class="sec-hint">→右：法人買超　←左：法人賣超　↑上：加速　↓下：放緩　泡泡大小＝近20日成交金額。'
+    +(data.flowNote||"資金流向＝三大法人買賣超（FinMind）")+'</div>';
+}
 function trendClass(t){ return t==="多頭" ? "b-up" : t==="空頭" ? "b-down" : "b-flat"; }
 function fmtTime(iso){
   if(!iso) return "—";
@@ -131,6 +228,7 @@ function render(data){
   const ov = document.getElementById("overall");
   if(data.overall){ ov.innerHTML = "<b>今日整體：</b>" + data.overall; ov.style.display=""; }
   else { ov.style.display="none"; }
+  renderSectors(data);
   const grid = document.getElementById("grid");
   grid.innerHTML = "";
   (data.items||[]).forEach(it=>{
@@ -169,7 +267,8 @@ function render(data){
         : '<div class="chart"><div class="noimg">（範例無圖，實際跑會帶入 QuickChart 的 K棒×均線 疊圖）</div></div>';
     }
     card.innerHTML =
-      '<div class="card-top"><span class="sym">'+it.symbol+'</span>'
+      '<div class="card-top"><span><span class="sym">'+it.symbol+'</span>'
+        +(it.sector?'<span class="sector-tag">'+it.sector+'</span>':'')+'</span>'
         +'<span class="badge '+trendClass(it.trend)+'">'+(it.trend||"—")+'</span></div>'
       +'<div class="price">收盤 <span class="close">'+fmt(it.close)+'</span></div>'
       +'<div class="stats">'
@@ -178,6 +277,9 @@ function render(data){
         +'<div class="stat"><div class="k">RSI(14)</div><div class="v '+rsiCls+'">'+fmt(it.rsi14)+'</div></div>'
         +'<div class="stat"><div class="k">MACD 柱狀</div><div class="v '+histCls+'">'+fmt(it.macdHist)+'</div></div>'
       +'</div>'
+      + ((it.netFlowEst!==null && it.netFlowEst!==undefined)
+          ? '<div class="flow '+(it.netFlowEst>=0?'in':'out')+'">資金流向(三大法人)　'+(it.netFlowEst>=0?'買超 ':'賣超 ')+fmtFlow(it.netFlowEst)+'</div>'
+          : '')
       + chart
       + (it.aiComment ? '<div class="ai"><span class="tag">AI 白話解讀</span>'+it.aiComment+'</div>' : '');
     grid.appendChild(card);
