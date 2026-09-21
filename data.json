@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-19T21:32:53.350+08:00",
+  "generatedAt": "2026-09-21T08:01:04.589+08:00",
   "overall": null,
   "note": "走勢標籤為技術指標客觀輸出，會有假訊號，非預測、非投資建議",
   "count": 8,
@@ -13,10 +13,10 @@
       "ma20": 322.64,
       "rsi14": 64.27,
       "macdHist": 1.6,
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-56c989c6-3ef1-4315-8a1c-2887578134b5",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-3195798f-8dc1-49b6-8f12-b178dcbc98b1",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "蘋果目前多頭表現，短期均線在長期均線之上，收盤在 MA20 上方，RSI 偏強來到 64 多，MACD 柱狀為正，動能不錯。",
+      "aiComment": "蘋果現在是多頭走勢，短期均線在長期均線上方，收盤價也在長期均線之上，RSI 偏強勢，MACD 柱狀為正，整體看起來滿強的。",
       "error": null
     },
     {
@@ -28,10 +28,10 @@
       "ma20": 497.51,
       "rsi14": 53.12,
       "macdHist": -3.17,
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-13b9fbe7-3d29-46f6-96a4-bbe87d1881ec",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-34bc4293-cdd9-4636-9de6-93b209194747",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "微軟現在空頭格局，短期均線跌破長期均線，收盤在 MA20 下方，RSI 中性、MACD 柱狀為負，動能較弱。",
+      "aiComment": "微軟目前是空頭走勢，短期均線已經跌到長期均線下方，收盤價也在長期均線之下，RSI 呈現中性，MACD 柱狀為負，近期表現較弱。",
       "error": null
     },
     {
@@ -43,10 +43,10 @@
       "ma20": 218.88,
       "rsi14": 54.19,
       "macdHist": -0.73,
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-c2bc08e0-9a4f-4b72-980b-d4fbb51d3e1c",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-fca2f85f-e080-4013-8d42-6fcb44c302f1",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "輝達走勢盤整中，短期均線還在長期均線下方，但收盤已經站上 MA20，RSI 中性、MACD 柱狀為負，方向不夠明確。",
+      "aiComment": "輝達現在處於盤整狀態，短期均線在長期均線下方，但收盤價仍在長期均線上方，RSI 中性沒有明確方向，MACD 柱狀為負，整體還在觀望。",
       "error": null
     },
     {
@@ -58,10 +58,10 @@
       "ma20": 614.61,
       "rsi14": 65.82,
       "macdHist": 7.79,
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-9933715e-685d-43c8-ace4-6340023fe0b2",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-cf57ff35-18de-4ee8-8647-b9324b656d98",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "美國Meta多頭強勢，短期均線在長期均線上方，收盤明顯高於 MA20，RSI 偏強 65 多，MACD 柱狀正值 7.79，氣勢十足。",
+      "aiComment": "美國Meta是多頭走勢，短期均線在長期均線上方，收盤價也在長期均線之上，RSI 偏強勢，MACD 柱狀為正，表現相當不錯。",
       "error": null
     },
     {
@@ -73,10 +73,10 @@
       "ma20": 354.24,
       "rsi14": 53.12,
       "macdHist": 2.37,
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-9c73c6f2-f2f3-4147-9976-3a5a66f9098b",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-650df80d-e5bc-4072-b77d-a8c154fda82c",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "Palo Alto多頭走勢，短期均線在長期均線上方，收盤在 MA20 上方，RSI 中性、MACD 柱狀為正，處於溫和上升態勢。",
+      "aiComment": "Palo Alto Networks 呈現多頭走勢，短期均線在長期均線上方，收盤價在長期均線之上，RSI 中性但 MACD 柱狀為正，還有上升的動能。",
       "error": null
     },
     {
@@ -88,10 +88,10 @@
       "ma20": 406.42,
       "rsi14": 51.8,
       "macdHist": -0.64,
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-1a5203aa-4f6b-4869-a636-726923efafb6",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-83da02ca-8d35-45df-b452-2c76ae54ac4b",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "Prelude盤整整理中，短期均線在長期均線下方，但收盤已站上 MA20，RSI 中性、MACD 柱狀為負，還在觀察期。",
+      "aiComment": "Prelude是盤整走勢，短期均線在長期均線下方，但收盤價在長期均線上方，RSI 中性沒有明確方向，MACD 柱狀為負，還在整理階段。",
       "error": null
     },
     {
@@ -103,10 +103,10 @@
       "ma20": 78.28,
       "rsi14": 50.89,
       "macdHist": -0.46,
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-0c65dec5-f561-4784-bd7b-c723a625e042",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-254140d3-a7a4-4988-acaa-e5d11ab2f721",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "Kinessa空頭走勢，短期均線跌破長期均線，收盤在 MA20 下方，RSI 中性、MACD 柱狀為負，缺乏買氣支撐。",
+      "aiComment": "Kinesa 目前是空頭走勢，短期均線在長期均線下方，收盤價也在長期均線之下，RSI 中性沒有買盤支撐，MACD 柱狀為負，走勢較弱。",
       "error": null
     },
     {
@@ -118,10 +118,10 @@
       "ma20": 145.33,
       "rsi14": 58.21,
       "macdHist": 0.52,
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-e23976d5-7de5-4242-af70-e87af3da2f9d",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-3b204487-5992-453b-8441-f3c8e0cbcf6d",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "Apellis多頭表現，短期均線在長期均線上方，收盤在 MA20 上方，RSI 偏強來到 58，MACD 柱狀為正，趨勢向上。",
+      "aiComment": "Sprott是多頭走勢，短期均線在長期均線上方，收盤價也在長期均線之上，RSI 偏強勢，MACD 柱狀為正，整體動能滿強的。",
       "error": null
     }
   ]
