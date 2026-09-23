@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-19T21:39:49.109+08:00",
+  "generatedAt": "2026-09-23T15:07:45.955+08:00",
   "overall": null,
   "note": "走勢標籤為技術指標客觀輸出，會有假訊號，非預測、非投資建議",
   "flowNote": "資金流向＝三大法人買賣超（真實，FinMind）；金額 ≈ 淨買超股數 × 收盤價。板塊為法人淨買超依產業彙整。",
@@ -8,10 +8,10 @@
   "sectors": [
     {
       "sector": "半導體",
-      "x": -22250786100,
-      "y": -43772538900,
-      "size": 52027431810,
-      "netFlow": 19382795100,
+      "x": 12695732500,
+      "y": 83683000000,
+      "size": 53980957665,
+      "netFlow": -10669360000,
       "symbols": [
         "台積電"
       ]
@@ -22,19 +22,19 @@
       "symbol": "台積電",
       "stock_id": "2330",
       "ok": true,
-      "trend": "盤整",
-      "close": 2460,
-      "ma5": 2406,
-      "ma20": 2416.75,
-      "rsi14": 57.28,
-      "macdHist": -0.79,
-      "netFlowEst": 19382795100,
-      "netSharesToday": 7879185,
+      "trend": "多頭",
+      "close": 2500,
+      "ma5": 2465,
+      "ma20": 2429.25,
+      "rsi14": 60.97,
+      "macdHist": 6.14,
+      "netFlowEst": -10669360000,
+      "netSharesToday": -4267744,
       "sector": "半導體",
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-9c866804-0939-4fdf-89c9-41af8b35dd46",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-98f333ab-f2da-4385-b25f-56ae21a487f6",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "台積電目前盤整中，收盤價在均線之上、RSI偏強，不過MACD柱狀還是負的，三大法人今天淨買超約193.8億元。",
+      "aiComment": "台積電走多頭，收在2500有撐，短期均線站上長期均線、RSI偏強、MACD柱狀轉正，不過今天三大法人卻淨賣超逾106億。",
       "error": null
     }
   ]
