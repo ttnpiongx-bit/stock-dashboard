@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T15:07:45.955+08:00",
+  "generatedAt": "2026-09-23T15:21:09.290+08:00",
   "overall": null,
   "note": "走勢標籤為技術指標客觀輸出，會有假訊號，非預測、非投資建議",
   "flowNote": "資金流向＝三大法人買賣超（真實，FinMind）；金額 ≈ 淨買超股數 × 收盤價。板塊為法人淨買超依產業彙整。",
@@ -31,10 +31,10 @@
       "netFlowEst": -10669360000,
       "netSharesToday": -4267744,
       "sector": "半導體",
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-98f333ab-f2da-4385-b25f-56ae21a487f6",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-dfe5c1be-498c-4aac-acfc-d78e0648a539",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "台積電走多頭，收在2500有撐，短期均線站上長期均線、RSI偏強、MACD柱狀轉正，不過今天三大法人卻淨賣超逾106億。",
+      "aiComment": "台積電多頭格局持續，收盤在均線之上、RSI偏強、MACD柱狀為正，不過今天三大法人淨賣超約106.7億。",
       "error": null
     }
   ]
