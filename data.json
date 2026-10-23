@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T18:00:16.816+08:00",
+  "generatedAt": "2026-10-23T18:00:06.582+08:00",
   "overall": null,
   "note": "走勢標籤為技術指標客觀輸出，會有假訊號，非預測、非投資建議",
   "flowNote": "資金流向＝三大法人買賣超（真實，FinMind）；金額 ≈ 淨買超股數 × 收盤價。板塊為法人淨買超依產業彙整。",
@@ -18,10 +18,10 @@
     },
     {
       "sector": "航運",
-      "x": 2809717040,
-      "y": -6362834660,
+      "x": 2809197040,
+      "y": -6363354660,
       "size": 3307736481,
-      "netFlow": 761504120,
+      "netFlow": 760984120,
       "symbols": [
         "長榮"
       ]
@@ -90,10 +90,10 @@
     },
     {
       "sector": "半導體",
-      "x": -147313591840,
-      "y": 82836862740,
+      "x": -147313708705,
+      "y": 82836745875,
       "size": 108067943811,
-      "netFlow": -26735971500,
+      "netFlow": -26736088365,
       "symbols": [
         "台積電",
         "聯發科"
@@ -111,13 +111,13 @@
       "ma20": 2485.25,
       "rsi14": 37.81,
       "macdHist": -18.45,
-      "netFlowEst": -24205665510,
-      "netSharesToday": -10149126,
+      "netFlowEst": -24205782375,
+      "netSharesToday": -10149175,
       "sector": "半導體",
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-5dde80fe-a948-4966-8de5-f88ac9945466",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-2bb4ff65-6699-4303-a309-25303c35023b",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "台積電今天空頭走勢，收在2385元，短期均線、動能都偏弱，三大法人賣超242億，買氣明顯不足。",
+      "aiComment": "台積電空頭走勢持續，收盤跌破短期均線，RSI偏弱、MACD轉負，法人大幅賣超242億。",
       "error": null
     },
     {
@@ -133,10 +133,10 @@
       "netFlowEst": -2530305990,
       "netSharesToday": -630999,
       "sector": "半導體",
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-6940f3b2-2851-44b4-87c9-421114cc0d0c",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-42799f12-28e5-455f-9bdc-a74c99efcf5c",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "聯發科空頭走勢持續，收在4010元，短期均線在長期均線下方，RSI也很弱，三大法人賣超25.3億。",
+      "aiComment": "聯發科陷入空頭，短期均線扣在中期均線下方，RSI接近超賣水位，法人賣超25億。",
       "error": null
     },
     {
@@ -152,10 +152,10 @@
       "netFlowEst": 469423430,
       "netSharesToday": 1916014,
       "sector": "電子零組件",
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-acaee00e-c818-4f2f-ba31-e09a8bf8e76f",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-b35cd200-64e1-409c-b16b-03956ad2d5c6",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "鴻海空頭走勢，收在245元，短期均線偏弱，不過三大法人小幅買超4.7億，顯示有些許支撐。",
+      "aiComment": "鴻海空頭格局未改，價格在均線下方整理，法人小幅買超4.7億，但力度有限。",
       "error": null
     },
     {
@@ -171,10 +171,10 @@
       "netFlowEst": -5007185040,
       "netSharesToday": -3209734,
       "sector": "電子零組件",
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-1551fa94-df76-4951-b88b-b138edc86adf",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-6104c944-2d48-4f2a-a990-35185dd4dbc5",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "台達電空頭走勢，收在1560元，短期均線拉不上來，RSI偏弱表現，三大法人賣超50.1億。",
+      "aiComment": "台達電空頭明確，收盤跌離均線，RSI偏弱，法人持續賣超50億。",
       "error": null
     },
     {
@@ -190,10 +190,10 @@
       "netFlowEst": 457185260,
       "netSharesToday": 1419830,
       "sector": "電腦及週邊",
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-f49b26c0-f8c0-4a09-9351-1a47bf6a31d8",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-81568ca0-4781-4594-a60a-c0733f9e9235",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "廣達空頭走勢，收在322元，短期均線在長期均線下方，不過三大法人小幅買超4.6億。",
+      "aiComment": "廣達空頭走勢中，短期均線貼著長期均線，法人小幅買超4.6億。",
       "error": null
     },
     {
@@ -209,10 +209,10 @@
       "netFlowEst": 960712206,
       "netSharesToday": 6080457,
       "sector": "通信網路",
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-26088ad7-5c96-4546-bc27-132add46f20e",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-a9d27938-19c2-4983-ac5d-968b24aa38ea",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "中華電多頭走勢，收在158元，短期均線在長期均線上方，RSI也偏強，三大法人買超9.6億。",
+      "aiComment": "中華電多頭啟動，價格站上均線、RSI極強89，法人買超9.6億呼應走勢。",
       "error": null
     },
     {
@@ -228,10 +228,10 @@
       "netFlowEst": 256758338,
       "netSharesToday": 2262188,
       "sector": "金融保險",
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-3ee5b7c2-7ad0-4e69-9b43-c2d9ad520922",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-f7816fa9-ae94-4467-9e6d-acb82a25f702",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "國泰金盤整走勢，收在113.5元，短期均線在長期均線上方，RSI中性表現，三大法人小幅買超2.6億。",
+      "aiComment": "國泰金盤整行情，價格略高於均線，RSI中性，法人小幅買超2.6億。",
       "error": null
     },
     {
@@ -247,10 +247,10 @@
       "netFlowEst": 325178917,
       "netSharesToday": 2051602,
       "sector": "金融保險",
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-15551d0f-d505-4431-9ce9-fcd4a9877a72",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-bf426fd9-7b14-4790-a7b6-5393e5368029",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "富邦金多頭走勢，收在158.5元，短期均線在長期均線上方，RSI偏強，三大法人買超3.3億。",
+      "aiComment": "富邦金多頭走勢，短期均線在長期均線上方，RSI偏強，法人買超3.3億。",
       "error": null
     },
     {
@@ -263,13 +263,13 @@
       "ma20": 248.2,
       "rsi14": 61.56,
       "macdHist": 0.96,
-      "netFlowEst": 761504120,
-      "netSharesToday": 2928862,
+      "netFlowEst": 760984120,
+      "netSharesToday": 2926862,
       "sector": "航運",
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-67f6472d-5535-4163-b44f-e9aa3f029e7b",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-3c620e72-f4a4-48e3-a325-61b7f37d79e0",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "長榮多頭走勢，收在260元，短期均線在長期均線上方，RSI和MACD都偏強，三大法人買超7.6億。",
+      "aiComment": "長榮多頭格局穩健，短期均線領先、RSI偏強、MACD正值，法人買超7.6億。",
       "error": null
     },
     {
@@ -285,10 +285,10 @@
       "netFlowEst": -1200098257,
       "netSharesToday": -16261494,
       "sector": "塑膠",
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-a8b5bec5-942d-4f4e-b0fe-0ca198248d14",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-9a4d196d-65fb-4141-a4de-777800111bfc",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "台塑盤整走勢，收在73.8元，短期均線在長期均線上方，RSI中性表現，三大法人賣超12億。",
+      "aiComment": "台塑盤整狀態，價格在均線上方踏穩，RSI中性，法人賣超12億。",
       "error": null
     },
     {
@@ -304,10 +304,10 @@
       "netFlowEst": 487338940,
       "netSharesToday": 24927823,
       "sector": "鋼鐵",
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-4aed04ab-1218-4fde-a513-a97049365d15",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-619f4600-0c26-4908-bb32-eb9f9a3c1e34",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "中鋼多頭走勢，收在19.55元，短期均線在長期均線上方，RSI偏強，三大法人買超4.9億。",
+      "aiComment": "中鋼多頭走勢，短期均線在上、RSI偏強61.8，MACD轉正，法人買超4.9億。",
       "error": null
     },
     {
@@ -323,10 +323,10 @@
       "netFlowEst": 305092552,
       "netSharesToday": 3832821,
       "sector": "食品",
-      "comboChartUrl": "https://quickchart.io/chart/render/zf-6f76b66f-1771-49ec-937b-26c75413a3d7",
+      "comboChartUrl": "https://quickchart.io/chart/render/zf-761c8dcf-4763-4dcc-88bf-898071dff960",
       "candleChartUrl": null,
       "maChartUrl": null,
-      "aiComment": "統一多頭走勢，收在79.6元，短期均線在長期均線上方，RSI和MACD都偏強，三大法人買超3.1億。",
+      "aiComment": "統一多頭運行，短期均線領先長期均線、RSI強勢66.8、MACD正向，法人買超3.1億。",
       "error": null
     }
   ]
